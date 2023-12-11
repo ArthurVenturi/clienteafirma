@@ -20,6 +20,15 @@ public final class IncorrectPageException extends IllegalArgumentException {
 	/**
 	 * Crea la excepci&oacute;n indicando que la p&aacute;gina no es correcta.
 	 * @param msg Mensaje de error.
+	 * @param cause Excepci&oacute;n de origen.
+	 */
+	public IncorrectPageException(final String msg, final Exception cause) {
+		super(msg, cause);
+	}
+
+	/**
+	 * Crea la excepci&oacute;n indicando que la p&aacute;gina no es correcta.
+	 * @param msg Mensaje de error.
 	 */
 	public IncorrectPageException(final String msg) {
 		super(msg);

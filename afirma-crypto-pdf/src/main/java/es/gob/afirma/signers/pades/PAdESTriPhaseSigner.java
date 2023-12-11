@@ -11,6 +11,7 @@ package es.gob.afirma.signers.pades;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -174,7 +175,10 @@ public final class PAdESTriPhaseSigner {
         final PdfTriPhaseSession ptps = PdfSessionManager.getSessionData(inPDF, signerCertificateChain, signTime, extraParams, secureMode);
 
         // Rango de bytes del PDF que debe firmarse
-        final byte[] pdfRangeBytes = AOUtil.getDataFromInputStream(ptps.getSAP().getRangeStream());
+        final byte[] pdfRangeBytes;
+        try (InputStream is = ptps.getSAP().getRangeStream()) {
+        	pdfRangeBytes = AOUtil.getDataFromInputStream(is);
+        }
 
         final CAdESParameters parameters = CAdESParameters.load(null, signatureAlgorithm, extraParams);
 

@@ -3,6 +3,7 @@ package es.gob.afirma.test.pades;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -25,11 +26,10 @@ public class TestAddingXmp {
 	public void test() throws Exception {
 
 		// PDF de ejemplo
-		final PdfReader reader = new PdfReader(
-			AOUtil.getDataFromInputStream(
-				ClassLoader.getSystemResourceAsStream("TEST_PDF.pdf") //$NON-NLS-1$
-			)
-		);
+		final PdfReader reader;
+		try (InputStream is = ClassLoader.getSystemResourceAsStream("TEST_PDF.pdf")) { //$NON-NLS-1$
+			reader = new PdfReader(AOUtil.getDataFromInputStream(is));
+		}
 		final ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		final Calendar globalDate = new GregorianCalendar();
 		final PdfStamper stamper = new PdfStamper(reader, baos, globalDate);
@@ -47,9 +47,10 @@ public class TestAddingXmp {
 //        // Insertamos el XMP en el PDF
 //        stamper.setXmpMetadata(os.toByteArray());
 
-		final String sigDataBase64 = Base64.encode(AOUtil.getDataFromInputStream(
-			ClassLoader.getSystemResourceAsStream("4df6ec6b6b5c7.jpg") //$NON-NLS-1$
-		));
+		final String sigDataBase64;
+		try (InputStream is = ClassLoader.getSystemResourceAsStream("4df6ec6b6b5c7.jpg")) { //$NON-NLS-1$
+			sigDataBase64 = Base64.encode(AOUtil.getDataFromInputStream(is));
+		}
 		final HashMap<String, String> moreInfo = new HashMap<>(1);
 		moreInfo.put("SignerBiometricSignatureData", sigDataBase64); //$NON-NLS-1$
 		moreInfo.put("SignerBiometricSignatureFormat", "ISO 19795-7"); //$NON-NLS-1$ //$NON-NLS-2$
@@ -61,9 +62,7 @@ public class TestAddingXmp {
 
         // Guardamos el resultado
         final File tmpFile = File.createTempFile("TESTXMP_", ".pdf"); //$NON-NLS-1$ //$NON-NLS-2$
-        try (
-    		final OutputStream fos = new FileOutputStream(tmpFile);
-		) {
+        try (final OutputStream fos = new FileOutputStream(tmpFile)) {
 	        fos.write(baos.toByteArray());
 	        fos.flush();
         }

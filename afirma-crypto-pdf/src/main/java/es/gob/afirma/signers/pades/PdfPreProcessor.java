@@ -9,13 +9,15 @@
 
 package es.gob.afirma.signers.pades;
 
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.reflect.Method;
 import java.net.URI;
 import java.util.Map;
 import java.util.Properties;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.aowagie.text.Annotation;
@@ -43,6 +45,8 @@ public final class PdfPreProcessor {
     private static final int LAST_PAGE = -1;
     private static final int ALL_PAGES = 0;
     private static final int FIRST_PAGE = 1;
+
+	private static Boolean imageIOExist = null;
 
 	private PdfPreProcessor() {
 		// No permitimos la instancacion
@@ -81,19 +85,17 @@ public final class PdfPreProcessor {
 
 			// Si no tenemos habilitado el modo seguro, permitiriamos que el recurso se cargue desde una
 			// ruta externa
-			if (!secureMode) {
-				// Permitimos un tamano maximo de ruta para no interpretar como ruta
-				// un base 64 grande
-				if (b64Attachment.length() < MAX_PATH_SIZE) {
-					try {
-						final URI uri = AOUtil.createURI(b64Attachment);
-						try (InputStream is = AOUtil.loadFile(uri)) {
-							attachment = AOUtil.getDataFromInputStream(is);
-						}
-					} catch (final Exception e) {
-						LOGGER.info("El parametro de adjunto no contiene una ruta valida a un recurso: " + e); //$NON-NLS-1$
-						attachment = null;
+			// Permitimos un tamano maximo de ruta para no interpretar como ruta
+			// un base 64 grande
+			if (!secureMode && b64Attachment.length() < MAX_PATH_SIZE) {
+				try {
+					final URI uri = AOUtil.createURI(b64Attachment);
+					try (InputStream is = AOUtil.loadFile(uri)) {
+						attachment = AOUtil.getDataFromInputStream(is);
 					}
+				} catch (final Exception e) {
+					LOGGER.info("El parametro de adjunto no contiene una ruta valida a un recurso: " + e); //$NON-NLS-1$
+					attachment = null;
 				}
 			}
 
@@ -271,20 +273,18 @@ public final class PdfPreProcessor {
 
     	// Si no tenemos habilitado el modo seguro, permitiriamos que la imagen se cargue desde una
     	// ruta externa
-    	if (!secureMode) {
-    		// Permitimos un tamano maximo de ruta para no interpretar como ruta
-    		// un base 64 grande
-    		if (imageReference.length() < MAX_PATH_SIZE) {
-    			try {
-    				final URI uri = AOUtil.createURI(imageReference);
-    				try (InputStream is = AOUtil.loadFile(uri)) {
-    					image = AOUtil.getDataFromInputStream(is);
-    				}
-    			} catch (final Exception e) {
-    				throw new IOException("El parametro de imagen no contiene una ruta valida a un recurso", e); //$NON-NLS-1$
-    			}
-    		}
-    	}
+    	// Permitimos un tamano maximo de ruta para no interpretar como ruta
+		// un base 64 grande
+		if (!secureMode && imageReference.length() < MAX_PATH_SIZE) {
+			try {
+				final URI uri = AOUtil.createURI(imageReference);
+				try (InputStream is = AOUtil.loadFile(uri)) {
+					image = AOUtil.getDataFromInputStream(is);
+				}
+			} catch (final Exception e) {
+				throw new IOException("El parametro de imagen no contiene una ruta valida a un recurso", e); //$NON-NLS-1$
+			}
+		}
 
     	// Si estaba configurado el modo seguro o el parametro de imagen no era una ruta,
     	// interpretamos que es un Base 64 con la propia imagen
@@ -300,18 +300,14 @@ public final class PdfPreProcessor {
 
     	// Si es posible en este entorno la imagen para hacerla asegurar su compatibilidad con PDF
     	byte[] normalizedImage;
-    	try {
-    		final Class<?> ImageUtilsClass = Class.forName("es.gob.afirma.ui.utils.ImageUtils"); //$NON-NLS-1$
-    		final Method normalizeImageToPdfMethod = ImageUtilsClass.getMethod("normalizeImageToPdf", byte[].class); //$NON-NLS-1$
-    		final Object normalizedImageObject = normalizeImageToPdfMethod.invoke(null, image);
-    		normalizedImage = (byte[]) normalizedImageObject;
+    	if (canNormalize()) {
+    		normalizedImage = normalizeImage(image);
     	}
-    	catch (final Throwable e) {
-    		LOGGER.log(Level.WARNING, "No se pudo normalizar la imagen de rubrica. Se agregara tal cual: " + e); //$NON-NLS-1$
+    	else {
     		normalizedImage = image;
     	}
 
-    	final Image jpgImage;
+    	Image jpgImage;
     	try {
 			jpgImage = new Jpeg(normalizedImage);
 		}
@@ -320,4 +316,86 @@ public final class PdfPreProcessor {
 		}
     	return jpgImage;
     }
+
+	/**
+	 * Normaliza la imagen para hacerla compatible con el PDF.
+	 * @param bi Imagen que se desea codificar.
+	 * @return Base 64 de la imagen JPEG.
+	 * @throws IOException Cuando ocurre un error en la codificaci&oacute;n o
+	 * transformaci&oacute;n de la imagen.
+	 */
+	static byte[] normalizeImage(final byte[] image) throws IOException {
+
+		BufferedImage loadedImage;
+		try (final InputStream is = new ByteArrayInputStream(image)) {
+			loadedImage = javax.imageio.ImageIO.read(is);
+		}
+
+		byte[] imageEncoded;
+		try (final ByteArrayOutputStream osImage = new ByteArrayOutputStream()) {
+			// Eliminamos las transparencias de la imagen
+			final BufferedImage opaqueImage = removeAlphaChannel(loadedImage);
+			// Convertimos la imagen a JPEG
+			if (!javax.imageio.ImageIO.write(opaqueImage, "jpg", osImage)) { //$NON-NLS-1$
+				throw new IOException("No se ha podido convertir la imagen a JPEG"); //$NON-NLS-1$
+			}
+			// Codificamos la imagen
+			imageEncoded = osImage.toByteArray();
+		}
+        catch (final Exception e) {
+        	throw new IOException("No ha podido decodificar la imagen", e); //$NON-NLS-1$
+        }
+		return imageEncoded;
+	}
+
+	/**
+	 * Elimina las transparencias de una imagen.
+	 * @param img Imagen de la que eliminar las transparencias.
+	 * @return Imagen sin transparencias.
+	 */
+	private static BufferedImage removeAlphaChannel(final BufferedImage img) {
+	    if (!img.getColorModel().hasAlpha()) {
+	        return img;
+	    }
+
+	    final BufferedImage target = createImage(img.getWidth(), img.getHeight(), false);
+	    final Graphics2D g = target.createGraphics();
+	    // g.setColor(new Color(color, false));
+	    g.fillRect(0, 0, img.getWidth(), img.getHeight());
+	    g.drawImage(img, 0, 0, null);
+	    g.dispose();
+
+	    return target;
+	}
+
+	/**
+	 * Crea una imagen vac&iacute;a con un tama&ntilde;o determinado y el canal alfa o no
+	 * seg&uacute;n se indique.
+	 * @param width Anchura de a imagen.
+	 * @param height Altura de la imagen.
+	 * @param hasAlpha Indica si la imagen debe tener canal alfa o no.
+	 * @return Imagen vac&iacute;a.
+	 */
+	private static BufferedImage createImage(final int width, final int height, final boolean hasAlpha) {
+	    return new BufferedImage(width, height, hasAlpha ? BufferedImage.TYPE_INT_ARGB : BufferedImage.TYPE_INT_RGB);
+	}
+
+	/**
+	 * Comprueba si se puede normalizar la imagen en el entorno actual.
+	 * @return {@code true} si el entorno permite que se normalice la imagen, {@code false}
+	 * en caso contrario.
+	 */
+	private static boolean canNormalize() {
+		if (imageIOExist == null) {
+			try {
+				Class.forName("javax.imageio.ImageIO", false, PdfPreProcessor.class.getClassLoader()); //$NON-NLS-1$
+				imageIOExist = Boolean.TRUE;
+			}
+			catch (final Exception e) {
+				LOGGER.warning("El sistema no tiene ImageIO: " + e); //$NON-NLS-1$
+				imageIOExist = Boolean.FALSE;
+			}
+		}
+		return imageIOExist.booleanValue();
+	}
 }

@@ -62,7 +62,7 @@ public final class PdfUtil {
     private static final String APPEND_PAGE = "append"; //$NON-NLS-1$
 
     /** N&uacute;mero que indica una p&aacute;gina nueva. */
-    private static final int NEW_PAGE = 0;
+    private static final Integer NEW_PAGE = Integer.valueOf(0);
 
     /** Valor en el par&aacute;metro signaturePage o signaturePages que
      * indica que se estampar&aacute; la firma visible en todas las paginas*/
@@ -146,7 +146,7 @@ public final class PdfUtil {
 	 * @throws InvalidPdfException Si el PDF era inv&aacute;lido o estaba corrupto.
 	 * @throws IOException Si hay errores en la lectura o escritura de datos.
 	 *  */
-	public static PdfReader getPdfReader(final byte[] inPDF,
+	static PdfReader getPdfReader(final byte[] inPDF,
 			                             final Properties xParams,
 			                             final boolean headless) throws PdfIsPasswordProtectedException,
 																		BadPdfPasswordException,
@@ -197,24 +197,16 @@ public final class PdfUtil {
 	 */
 	static void checkPdfCertification(final int pdfCertificationLevel, final Properties extraParams) throws PdfIsCertifiedException, AOException {
 
-		// Si se ha configurado que se firme en cualquier caso, no hacemos mas comprobaciones
-		final String forceSignature = extraParams.getProperty(PdfExtraParams.ALLOW_SIGNING_CERTIFIED_PDFS);
-		if (forceSignature != null && Boolean.parseBoolean(forceSignature)) {
-			return;
-		}
-
-		// Identificamos si el PDF permite firmas
-		final boolean signAllowed = pdfCertificationLevel != PdfSignatureAppearance.CERTIFIED_NO_CHANGES_ALLOWED;
-
-		// Si no se permiten firmas y no se establecio ningun comportamiento, usamos una excepcion
-		// que permita a la aplicacion identificar el problema y dar la opcion de firmar la firma
-		// (PdfIsCertifiedException). Si no se permiten y se establecio un comportamiento (que ya
-		// sabemos que no fue forzar las firmas), lanzamos un error definitivo (AOException).
-		if (!signAllowed) {
-			if (forceSignature == null) {
+		// Si el PDF esta certificado, se comprobara si se ha indicado expresamente que se permite
+		// multifirmar este tipo de documentos. Si no se permite, se lanza una excepcion
+		if (pdfCertificationLevel != PdfSignatureAppearance.NOT_CERTIFIED) {
+			final String allow = extraParams.getProperty(PdfExtraParams.ALLOW_SIGNING_CERTIFIED_PDFS);
+			if (allow == null || allow.trim().isEmpty()) {
 				throw new PdfIsCertifiedException("El PDF esta certificado"); //$NON-NLS-1$
 			}
-			throw new AOException("El PDF esta certificado y se configuro que no se admitia su firma"); //$NON-NLS-1$
+			if (!Boolean.parseBoolean(allow)) {
+				throw new AOException("El PDF esta certificado y se configuro que no se admitia su firma"); //$NON-NLS-1$
+			}
 		}
 	}
 
@@ -583,7 +575,7 @@ public final class PdfUtil {
 		}
 		catch (final Exception e) {
 			final String cleanedText = range.length() > 12 ? range.substring(0, 12) + "..." : range; //$NON-NLS-1$
-			throw new IncorrectPageException("La cadena introducida no se corresponde con un rango de paginas: " + cleanedText); //$NON-NLS-1$
+			throw new IncorrectPageException("La cadena introducida no se corresponde con un rango de paginas: " + cleanedText, e); //$NON-NLS-1$
 		}
 
 		if (limitNumber < firstNumber) {
@@ -638,47 +630,46 @@ public final class PdfUtil {
      * @return Devuelve true en caso de que el formato sea correcto y false en caso contrario.
      */
     public static boolean checkPagesRangeInputFormat(final String rangeInput) {
-    	if (!rangeInput.isEmpty()) {
-
-	    	final String rangeChars = "0123456789-,"; //$NON-NLS-1$
-
-    		if (RANGE_SEPARATOR.equals(String.valueOf(rangeInput.charAt(rangeInput.length() -1)))
-    				|| rangeInput.length() == 1 && RANGE_SEPARATOR.equals(rangeInput)) {
-    			return false;
-    		}
-
-	    	for (int i = 0; i < rangeInput.length(); i++) {
-	    		// Comprobamos que sea un caracter correcto
-	    		if (!rangeChars.contains(String.valueOf(rangeInput.charAt(i)))
-	    			// Comprobamos que no se hayan introducido tres guiones seguidos
-	    			|| i+2 < rangeInput.length()
-		    				&& RANGE_INDICATOR.equals(String.valueOf(rangeInput.charAt(i)))
-		    				&& RANGE_INDICATOR.equals(String.valueOf(rangeInput.charAt(i +1)))
-		    				&& RANGE_INDICATOR.equals(String.valueOf(rangeInput.charAt(i +2)))
-	    			// Comprobamos que no se hayan introducido dos comas seguidas
-	    			|| i+1 < rangeInput.length()
-		    				&& RANGE_SEPARATOR.equals(String.valueOf(rangeInput.charAt(i)))
-		    				&& RANGE_SEPARATOR.equals(String.valueOf(rangeInput.charAt(i +1)))) {
-	    			return false;
-	            }
-	    	}
-
-	    	final String[] rangesArray = rangeInput.split(RANGE_SEPARATOR);
-	    	for (final String range : rangesArray) {
-
-	    		if (RANGE_INDICATOR.equals(String.valueOf(range.charAt(range.length() -1)))
-	    			// Comprobamos que el rango no termine con un guion
-	    			|| range.length() >= 2
-		    				&& RANGE_INDICATOR.equals(String.valueOf(range.charAt(0)))
-		    				&& RANGE_INDICATOR.equals(String.valueOf(range.charAt(1)))
-		    		// Comprobamos que se haya introducido un numero en caso de que la longitud sea 1
-		    		|| range.length() == 1 && RANGE_INDICATOR.equals(range)) {
-	    			return false;
-	    		}
-	    	}
-    	} else {
+    	if (rangeInput.isEmpty()) {
     		return false;
     	}
+		final String rangeChars = "0123456789-,"; //$NON-NLS-1$
+
+		if (RANGE_SEPARATOR.equals(String.valueOf(rangeInput.charAt(rangeInput.length() -1)))
+				|| rangeInput.length() == 1 && RANGE_SEPARATOR.equals(rangeInput)) {
+			return false;
+		}
+
+		for (int i = 0; i < rangeInput.length(); i++) {
+			// Comprobamos que sea un caracter correcto
+			if (!rangeChars.contains(String.valueOf(rangeInput.charAt(i)))) {
+				return false;
+		    }
+			if (i+2 < rangeInput.length()
+					&& RANGE_INDICATOR.equals(String.valueOf(rangeInput.charAt(i)))
+					&& RANGE_INDICATOR.equals(String.valueOf(rangeInput.charAt(i +1)))
+					&& RANGE_INDICATOR.equals(String.valueOf(rangeInput.charAt(i +2)))) {
+				return false;
+			}
+			if (i+1 < rangeInput.length()
+					&& RANGE_SEPARATOR.equals(String.valueOf(rangeInput.charAt(i)))
+					&& RANGE_SEPARATOR.equals(String.valueOf(rangeInput.charAt(i +1)))) {
+				return false;
+			}
+		}
+
+		final String[] rangesArray = rangeInput.split(RANGE_SEPARATOR);
+		for (final String range : rangesArray) {
+
+			if (RANGE_INDICATOR.equals(String.valueOf(range.charAt(range.length() -1))) || range.length() >= 2
+					&& RANGE_INDICATOR.equals(String.valueOf(range.charAt(0)))
+					&& RANGE_INDICATOR.equals(String.valueOf(range.charAt(1)))) {
+				return false;
+			}
+			if (range.length() == 1 && RANGE_INDICATOR.equals(range)) {
+				return false;
+			}
+		}
     	return true;
     }
 
@@ -706,7 +697,7 @@ public final class PdfUtil {
 
 		// Si no se ha indicado ninguna pagina, se firmara en la ultima
 		if (pagesStr.length == 0) {
-			pages.add(totalPages);
+			pages.add(Integer.valueOf(totalPages));
 		}
 		// El valor APPEND_PAGE pide que se firme en una pagina posterior a la primera
 		else if (APPEND_PAGE.equalsIgnoreCase(pagesStr[0].trim())) {
@@ -714,7 +705,7 @@ public final class PdfUtil {
 		// El valor ALL_PAGES pide que se firme en todas las paginas
 		} else if (ALL_PAGES.equalsIgnoreCase(pagesStr[0].trim())) {
 			for (int page = 1; page <= totalPages; page++) {
-				pages.add(page);
+				pages.add(Integer.valueOf(page));
 			}
 		// Rellenamos con las paginas y rangos indicados, evitando que se indiquen
 		// paginas posteriores a la ultima
@@ -734,7 +725,7 @@ public final class PdfUtil {
 		// Si nada de lo que se configuro definio un numero de pagina valido para el documento,
 		// se usara la ultima pagina para la firma visible PDF
 		if (pages.isEmpty()) {
-			pages.add(totalPages);
+			pages.add(Integer.valueOf(totalPages));
 		}
 
 		return pages;
