@@ -1,14 +1,16 @@
-# Autofirma
+# ![Logo de la Suite @firma](logo_autofirma.png)
 
-Autofirma es uno de los productos de la Suite @firma de soluciones de identificación y firma electrónica. Se proporciona de a las Administraciones Públicas para que dispongan de los instrumentos necesarios para implementar la autenticación y firma electrónica avanzada de una forma rápida y efectiva.
+Autofirma es uno de los productos de la **Suite @firma** de soluciones de identificación y firma electrónica. Se proporciona a las Administraciones Públicas para que dispongan de los instrumentos necesarios para implementar la autenticación y firma electrónica avanzada de una forma rápida y efectiva.
 
 Autofirma es una herramienta de firma electrónica en entornos de escritorio y dispositivos móviles, que funciona en forma de Applet de Java integrado en una página Web mediante JavaScript, como aplicación de escritorio, o como aplicación móvil, dependiendo del entorno del usuario.
 
-Es software libre con licencia GPL 2+ y EUPL 1.1. Puede consular más información y el código del producto en la forja del CTT.
+Es **software libre** con licencia **GPL 2+** y **EUPL 1.1**. Puede consultar más información y el código del producto en la forja del [Centro de Transferencia de Tecnología (CTT)](https://github.com/ctt-gob-es/clienteafirma).
+
+---
 
 ## Construcción de Autofirma
 
-Los módulos de Autofirma se encuentran preparados para su compilación y empaquetado mediante Apache Maven. Los módulos básicos del Cliente son compatibles con Java 1.7. Sin embargo, las bibliotecas JUnit que se importan ya requieren el uso de Java 1.8 o superior, por lo que deberemos tener configurado una JDK 1.8 o superior para compilar el proyecto. La aplicación Autofirma se compila directamente para Java 1.8.
+Los módulos de Autofirma se encuentran preparados para su compilación y empaquetado mediante **Apache Maven**. Los módulos básicos del Cliente son compatibles con Java 1.7. Sin embargo, las bibliotecas JUnit que se importan ya requieren el uso de Java 1.8 o superior, por lo que deberemos tener configurada una JDK 1.8 o superior para compilar el proyecto. La aplicación Autofirma se compila directamente para Java 1.8.
 
 A continuación se indican los distintos parámetros a utilizar para construir sus artefactos según el uso que se desee dar. A cualquiera de los comandos que se indican se le puede agregar el parámetro `-DskipTests` para omitir los tests JUnit.
 
@@ -16,7 +18,9 @@ A continuación se indican los distintos parámetros a utilizar para construir s
 
 Los módulos de Autofirma incluidos en este repositorio se pueden construir mediante el siguiente comando de Maven.
 
-`mvn clean install`
+```bash
+mvn clean install
+```
 
 Este comando generará todos los módulos básicos del proyecto.
 
@@ -24,7 +28,9 @@ Este comando generará todos los módulos básicos del proyecto.
 
 Para la construcción de Autofirma (JAR) y los servicios que utiliza será necesario usar el perfil `env-install`. Este se puede activar mediante el comando:
 
-`mvn clean install -Denv=install`
+```bash
+mvn clean install -Denv=install
+```
 
 Con esto, se podrán construir los artefactos:
 
@@ -36,9 +42,13 @@ Con esto, se podrán construir los artefactos:
 
 ### Despliegue en repositorio de artefactos
 
-Para el despliegue de los distintos módulos en un repositorio de artefactos, además de la construcción de los los propios artefactos, es necesario aportar el código fuente de la aplicación, su JavaDoc y firmar los distintos artefactos. Para evitar generar estos recursos y realizar la firma de los artefactos para la operativa ordinaria de compilación y empaquetado se ha creado un perfil `env-deploy` para que se utilice sólo cuando se va a proceder al despliegue de los artefactos en un repositorio. Se puede hacer eso mediante el comando:
+Para el despliegue de los distintos módulos en un repositorio de artefactos, además de la construcción de los propios artefactos, es necesario aportar el código fuente de la aplicación, su JavaDoc y firmar los distintos artefactos. Para evitar generar estos recursos y realizar la firma de los artefactos para la operativa ordinaria de compilación y empaquetado se ha creado un perfil `env-deploy` para que se utilice sólo cuando se va a proceder al despliegue de los artefactos en un repositorio. Se puede hacer eso mediante el comando:
 
-`mvn clean deploy -Denv=deploy`
+```bash
+mvn clean deploy -Denv=deploy
+```
+
+---
 
 ## Módulos del proyecto
 
@@ -90,9 +100,9 @@ A continuación, se muestra un listado de los distintos módulos actualmente en 
 
 La lista de módulos obsoletos y/o sin soporte que se conservan en el repositorio son los siguientes:
 
-* `afirma-crypto-cipher`: __Obsoleto.__ Módulo con las clases para el cifrado sincrono y asíncrono de datos usado en el antiguo Applet de @firma y StandAlone.
-* `afirma-crypto-cms-enveloper`: __Obsoleto.__ Módulo con la lógica para la generación de sobre digitales CMS utilizada en los antiguos Applet de @firma y StandAlone.
-* `afirma-crypto-core-pkcs7-tsp`: __Sin soporte.__ Módulo con la lógica para agregar sellos de siempre a firmas PKCS#7 
+* `afirma-crypto-cipher`: __Obsoleto.__ Módulo con las clases para el cifrado síncrono y asíncrono de datos usado en el antiguo Applet de @firma y StandAlone.
+* `afirma-crypto-cms-enveloper`: __Obsoleto.__ Módulo con la lógica para la generación de sobres digitales CMS utilizada en los antiguos Applet de @firma y StandAlone.
+* `afirma-crypto-core-pkcs7-tsp`: __Sin soporte.__ Módulo con la lógica para agregar sellos de tiempo a firmas PKCS#7.
 * `afirma-crypto-jarverifier`: __Obsoleto.__ Módulo para la comprobación de la integridad de un JAR utilizada en el antiguo Applet de @firma.
 * `afirma-crypto-pdf-enhancer`: __Obsoleto.__ Módulo con un cliente SOAP para el envío de peticiones a @firma para la actualización de PDF a formatos longevos.
 * `afirma-keystores-capiaddressbook`: __Obsoleto.__ Módulo con la lógica de acceso a la libreta de direcciones de Windows.
@@ -106,7 +116,7 @@ La lista de módulos obsoletos y/o sin soporte que se conservan en el repositori
 * `afirma-ui-applet`: __Obsoleto.__ Módulo principal del antiguo Applet de @firma.
 * `afirma-ui-applet-deploy`: __Obsoleto.__ Módulo con el JavaScript de despliegue del antiguo Applet de @firma.
 * `afirma-ui-miniapplet`: __Obsoleto.__ Módulo principal del antiguo MiniApplet.
-* `afirma-ui-simple-webstart`: __Obsoleto.__ Módulo principal del antiguo empaquetado de Autofirma como aplicación WebStart,
+* `afirma-ui-simple-webstart`: __Obsoleto.__ Módulo principal del antiguo empaquetado de Autofirma como aplicación WebStart.
 * `afirma-windows-store`: __Obsoleto.__ Módulo principal del antiguo cliente de firma para Windows 8.
 
-No se ofrece ningún tipo de mantenimiento ni soporte sobre estos módulos.
+**No se ofrece ningún tipo de mantenimiento ni soporte sobre estos módulos.**
