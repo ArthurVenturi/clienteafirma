@@ -4,7 +4,7 @@ Autofirma es uno de los productos de la **Suite @firma** de soluciones de identi
 
 Autofirma es una herramienta de firma electrónica en entornos de escritorio y dispositivos móviles, que funciona en forma de Applet de Java integrado en una página Web mediante JavaScript, como aplicación de escritorio, o como aplicación móvil, dependiendo del entorno del usuario.
 
-Es **software libre** con licencia **GPL 2+** y **EUPL 1.1**. Puede consultar más información y el código del producto en la forja del [Centro de Transferencia de Tecnología (CTT)](https://github.com/ctt-gob-es/clienteafirma).
+Es **software libre** con licencia **GPL 2+** y **EUPL 1.1**. Puede consultar más información y el código del producto en la forja del [Centro de Transferencia de Tecnología (CTT)](https://github.com/ctt-gob-es/).
 
 ---
 
