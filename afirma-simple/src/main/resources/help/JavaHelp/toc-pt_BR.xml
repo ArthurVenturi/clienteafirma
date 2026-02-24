@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<toc version="1.0"> 
+	<tocitem text="Autofirma" target="Autofirma">
+		<tocitem text="Tela de espera" target="PantallaEspera" />
+		<tocitem text="Tela de assinatura" target="PantallaFirma" />
+		<tocitem text="Tela de detalhes da assinatura" target="PantallaDetalle" />
+		<tocitem text="Menu de Preferências" target="MenuPreferencias" />
+		<tocitem text="Janela de configuração de plugins" target="MenuPlugins" />
+		<tocitem text="Janela de configuração de proxy" target="VentanaConfigurarProxy" />
+		<tocitem text="Janela de configuração de assinatura visível em PDF" target="VentanaPdfVisible" />
+		<tocitem text="Uso por linha de comando" target="LineaComandos" />
+		<tocitem text="Licenças" target="Licencia" />
+	</tocitem>
+</toc>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+ <head>
+    <title>Uso por linha de comando</title>
+    <meta name="AppleTitle" content="Ajuda do Autofirma">
+    <meta name="AppleIcon" content="AutofirmaHelpIcon.png">
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+ </head>
+ <body>
+    <h2>Uso por linha de comando</h2>
+    <p>O Autofirma permite seu uso por linha de comando, fornecendo funcionalidades de assinatura, assinatura em lote e criação e verificação de hashes.</p>
+    <p>O executável ou script a ser utilizado para a execução do Autofirma por linha de comando varia conforme o sistema:
+    <ul>
+        <li>Windows</li>
+            <ul>
+                <li>O processo de instalação copia no diretório do Autofirma o executável "AutofirmaCommandLine" e, se possível, inclui o diretório no <i>path</i>. Use este executável na linha de comando para realizar as operações suportadas.</li>
+            </ul>
+        <li>Linux</li>
+            <ul>
+                <li>O processo de instalação gera no diretório "/usr/bin" o script "autofirma". Use este script para executar o aplicativo fornecendo diretamente os parâmetros da operação desejada.</li>
+            </ul>
+        <li>macOS</li>
+            <ul>
+                <li>Para o uso do aplicativo por linha de comando, é criado dentro do aplicativo um script "AutofirmaCommandLine" no diretório do aplicativo. Você pode executar este script acessando o diretório interno "Resources" do aplicativo (geralmente, "/Applications/Autofirma.app/Contents/MacOS"). É importante que <b>os parâmetros que possam conter espaços sejam passados no comando entre aspas simples</b>.</li>
+            </ul>
+    </ul>
+    <p>Por exemplo, é possível executar o Autofirma e listar as operações disponíveis por linha de comando com o comando "-help" da seguinte forma:</p>
+    <span>No Windows:</span>
+    <ul><li><code>AutofirmaCommandLine –help</code></li></ul>
+    <span>No Linux:</span>
+    <ul><li><code>/usr/bin/Autofirma –help</code></li></ul>
+    <span>No Mac:</span>
+    <ul><li><code>/Applications/Autofirma.app/Contents/MacOS/AutofirmaCommandLine –help</code></li></ul>
+    <p>Isso resultaria em:</p>
+    <div style="background-color: black; color: white; width: 50%">
+        <code><pre>
+Ferramenta de assinatura de documentos.
+
+Sintaxe: Autofirma cmd [opções...]
+
+Comandos cmd:
+
+    sign           (assinatura de arquivo)
+    cosign         (coassinatura de arquivo)
+    countersign    (contrafirma de arquivo)
+    listaliases    (lista os aliases disponíveis no repositório)
+    verify         (abre um painel com informações de validação de uma assinatura ou certificado)
+    batchsign      (assinatura/multissinatura de lotes de arquivos)
+    createdigest   (criação de hash digital com interface gráfica)
+    checkdigest    (verificação de hash digital com interface gráfica)
+
+Use "Autofirma cmd -help" para ver a sintaxe do comando "cmd"
+        </pre></code>
+    </div>
+
+    <p>Para listar as opções de configuração de alguma das operações, você pode usar o comando "-help" sobre qualquer uma delas. Por exemplo:</p>
+    <ul><li><code>AutofirmaCommandLine sign –help</code></li></ul>
+
+    <p>Isso resultaria em:</p>
+    <div style="background-color: black; color: white; width: 50%">
+        <code><pre>
+Sintaxe: Autofirma sign [opções...]
+
+Opções:
+    -gui                   (Realiza a operação com interface gráfica. Tem prioridade sobre -certgui)
+    -certgui               (Usa um diálogo gráfico para seleção do certificado de assinatura)
+    -i inputfile           (Caminho do arquivo de entrada)
+    -o outputfile          (Caminho do arquivo de saída)
+    -algorithm algo        (Algoritmo de assinatura)
+    -format                (Define o formato de assinatura)
+                 auto            (Seleção de formato com base no arquivo de entrada)
+                 cades           (Formato CAdES)
+                 pades           (Formato PAdES)
+                 xades           (Formato XAdES)
+                 facturae        (Assinatura de nota fiscal eletrônica)
+    -config extraParams    (Propriedades em texto simples com a configuração da operação)
+    -store                 (Define o repositório de chaves. Por padrão, o do sistema)
+                 auto            (Repositório de chaves do sistema)
+                 windows         (Repositório de chaves do Windows)
+                 mac             (Repositório de chaves do macOS)
+                 mozilla         (Repositório de chaves do Mozilla Firefox)
+                 dni             (DNI eletrônico)
+                 pkcs12:p12file  (Repositório PKCS#12. "p12file" é o caminho do repositório)
+                 pkcs11:p11file  (Repositório PKCS#11. "p11file" é o caminho do driver)
+
+    -password password     (Define a senha do repositório)
+    -alias alias           (Alias do certificado de assinatura)
+    -filter filter         (Filtro para selecionar o certificado de assinatura)
+    -xml                   (Formata a resposta como XML)
+        </pre></code>
+    </div>
+    <p>O parâmetro de configuração <code>-config</code> permite fornecer uma lista de propriedades de configuração concatenadas por "\n". Cada uma dessas propriedades terá o formato chave=valor.</p>
+    <p>Um exemplo de parâmetro de configuração seria:</p>
+        <ul><li><code>-config "format=XAdES Enveloping\nsignerClaimedRoles=Diretor\nxadesNamespace=http://uri.etsi.org/01903/v1.4.1#</code></li></ul>
+    <p>As opções de configuração variam de acordo com o formato de assinatura. A seguir são descritas as opções de configuração para cada formato de assinatura.</p>
+
+    <h3>Opções de configuração de assinaturas CAdES</h3>
+    <p>A seguir estão listadas as propriedades de configuração suportadas pelas assinaturas CAdES. Algumas dessas opções podem não ter efeito em casos de assinatura em que não se apliquem, como no caso das contrafirmas.</p>
+    <ul>
+    <li style="margin-top: 15pt"><code>mode</code>:</li>
+        <ul>
+        <li><code>explicit</code>: A assinatura resultante não incluirá os dados assinados. Se não for indicado, a propriedade <code>mode</code> configura automaticamente este comportamento.</li>
+        <li><code>implicit</code>: A assinatura resultante incluirá internamente uma cópia dos dados assinados. O uso deste valor pode gerar assinaturas de grande tamanho. Em coassinaturas, esta propriedade será ignorada se os dados já estavam contidos na assinatura original ou se não forem fornecidos os dados.</li>
+    </ul>
+    <li style="margin-top: 10pt"><code>contentTypeOid</code>:</li>
+    <ul>
+        <li>Identificador do tipo de dado assinado.</li>
+    </ul>
+    <li style="margin-top: 10pt"><code>contentDescription</code>:</li>
+    <ul>
+        <li>Descrição textual do tipo de dados assinados.</li>
+    </ul>
+    <li style="margin-top: 10pt"><code>includeMimeTypeAttribute</code>:</li>
+    <ul>
+        <li><code>true</code>: Inclui na assinatura o atributo id-aa-ets-mimeType definido em CAdES v2.1.1 e superiores (válido em assinaturas baseline). O valor de mimetype será obtido da propriedade <code>mimetype</code> ou, se não incluído, será extrapolado da propriedade <code>contentTypeOid</code>. Se também não for possível, tentará obter esses valores de alguma das assinaturas anteriores (em caso de coassinaturas). Se ainda não for possível, obterá o tipo da análise dos dados (que pode não ser correto ou específico). Caso não seja possível obter o tipo de nenhuma forma, será usado o mimetype application/octet-stream.</li>
+        <li><code>false</code>: Não inclui o atributo id-aa-ets-mimeType na assinatura. Valor padrão.</li>
+    </ul>
+    <li style="margin-top: 10pt"><code>mimeType</code>:</li>
+    <ul>
+        <li>Tipo MIME a ser incluído na assinatura.</li>
+    </ul>
+    <!-- ...continuação da tradução conforme necessário... -->
+    </ul>
+ </body>
+</html>

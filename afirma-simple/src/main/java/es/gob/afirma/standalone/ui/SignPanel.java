@@ -9,13 +9,6 @@
 
 package es.gob.afirma.standalone.ui;
 
-import static es.gob.afirma.standalone.configurator.common.PreferencesManager.PREFERENCE_GENERAL_DEFAULT_FORMAT_BIN;
-import static es.gob.afirma.standalone.configurator.common.PreferencesManager.PREFERENCE_GENERAL_DEFAULT_FORMAT_FACTURAE;
-import static es.gob.afirma.standalone.configurator.common.PreferencesManager.PREFERENCE_GENERAL_DEFAULT_FORMAT_ODF;
-import static es.gob.afirma.standalone.configurator.common.PreferencesManager.PREFERENCE_GENERAL_DEFAULT_FORMAT_OOXML;
-import static es.gob.afirma.standalone.configurator.common.PreferencesManager.PREFERENCE_GENERAL_DEFAULT_FORMAT_PDF;
-import static es.gob.afirma.standalone.configurator.common.PreferencesManager.PREFERENCE_GENERAL_DEFAULT_FORMAT_XML;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
@@ -84,6 +77,12 @@ import es.gob.afirma.standalone.LookAndFeelManager;
 import es.gob.afirma.standalone.SimpleAfirma;
 import es.gob.afirma.standalone.SimpleAfirmaMessages;
 import es.gob.afirma.standalone.configurator.common.PreferencesManager;
+import static es.gob.afirma.standalone.configurator.common.PreferencesManager.PREFERENCE_GENERAL_DEFAULT_FORMAT_BIN;
+import static es.gob.afirma.standalone.configurator.common.PreferencesManager.PREFERENCE_GENERAL_DEFAULT_FORMAT_FACTURAE;
+import static es.gob.afirma.standalone.configurator.common.PreferencesManager.PREFERENCE_GENERAL_DEFAULT_FORMAT_ODF;
+import static es.gob.afirma.standalone.configurator.common.PreferencesManager.PREFERENCE_GENERAL_DEFAULT_FORMAT_OOXML;
+import static es.gob.afirma.standalone.configurator.common.PreferencesManager.PREFERENCE_GENERAL_DEFAULT_FORMAT_PDF;
+import static es.gob.afirma.standalone.configurator.common.PreferencesManager.PREFERENCE_GENERAL_DEFAULT_FORMAT_XML;
 import es.gob.afirma.standalone.plugins.DataProcessAction;
 import es.gob.afirma.standalone.plugins.InputData;
 import es.gob.afirma.standalone.ui.SignOperationConfig.CryptoOperation;
@@ -955,11 +954,12 @@ public final class SignPanel extends JPanel implements LoadDataFileListener, Sig
 		    	this.loadDataListener.loadFiles(files, null);
 			});
 
-	        final JLabel welcomeLabel = new JLabel(SimpleAfirmaMessages.getString("SignPanel.14")); //$NON-NLS-1$
-	        welcomeLabel.setFocusable(false);
-	        welcomeLabel.setFont(welcomeLabel.getFont().deriveFont(Font.PLAIN, 26));
-	        welcomeLabel.setLabelFor(getSelectButton());
-	        this.add(welcomeLabel, BorderLayout.PAGE_START);
+			final JLabel welcomeLabel = new JLabel(SimpleAfirmaMessages.getString("SignPanel.14")); //$NON-NLS-1$
+			welcomeLabel.setFocusable(false);
+			welcomeLabel.setFont(welcomeLabel.getFont().deriveFont(Font.PLAIN, 26));
+			welcomeLabel.setForeground(LookAndFeelManager.HIGHLIGHT_FONT_COLOR);
+			welcomeLabel.setLabelFor(getSelectButton());
+			this.add(welcomeLabel, BorderLayout.PAGE_START);
 
 	        final String intro = SimpleAfirmaMessages.getString("SignPanel.40"); //$NON-NLS-1$
 
@@ -981,7 +981,7 @@ public final class SignPanel extends JPanel implements LoadDataFileListener, Sig
 	            setBackground(LookAndFeelManager.DEFAULT_COLOR);
 	            introPanel.setBackground(LookAndFeelManager.DEFAULT_COLOR);
 	            selectPanel.setBackground(LookAndFeelManager.DEFAULT_COLOR);
-	            welcomeLabel.setForeground(new Color(3399));
+	            welcomeLabel.setForeground(LookAndFeelManager.HIGHLIGHT_FONT_COLOR);
 	        }
 
 	    }
@@ -1011,7 +1011,7 @@ public final class SignPanel extends JPanel implements LoadDataFileListener, Sig
 	        setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
 
 	        // Identificamos el color de fondo
-	        Color bgColor = Color.WHITE;
+	        Color bgColor = Color.BLACK;
 	        if (!LookAndFeelManager.WINDOWS_HIGH_CONTRAST && !Platform.OS.MACOSX.equals(Platform.getOS())) {
 	        	bgColor = LookAndFeelManager.DEFAULT_COLOR;
 	        }

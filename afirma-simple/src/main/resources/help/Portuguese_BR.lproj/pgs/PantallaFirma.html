@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+ <head>
+    <title>Autofirma</title>
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+    <meta name="KEYWORDS" content="assinar, CAdES, XAdES, PAdES, ODF, OOXML formato">
+    <meta name="description" content="Assinatura eletrônica de arquivos.">
+    <style>
+        .bold {
+            font-weight: bold;
+        }
+    </style>
+ </head>
+ <body>
+    <h2>Tela de assinatura</h2>
+    <p>
+     Nesta tela você pode selecionar os documentos ou diretórios que deseja assinar.
+    </p>
+    <p align="center">
+     <img src="../gfx/pantallafirma1_mini.png" alt="Tela para seleção e assinatura de documentos">
+    </p>
+    <p>
+     Você pode selecionar um ou mais documentos clicando no botão "Selecionar arquivos para assinar" ou arrastando os documentos e/ou diretórios para a área indicada (o quadro de cor cinza escuro).
+    </p>
+    <p>
+        Ao carregar os documentos para assinar, serão exibidos alguns detalhes sobre eles, que variarão conforme seja selecionado um único arquivo ou vários:
+    </p>
+    <p align="center">
+     <img src="../gfx/pantallafirma4_mini.png" alt="Tela para seleção e assinatura de documentos com um arquivo carregado">
+     <img src="../gfx/pantallafirma3_mini.png" alt="Tela para seleção e assinatura com múltiplos arquivos carregados">
+    </p>
+    <p>
+     No quadro habilitado para arrastar os documentos que deseja assinar, aparecerão as informações do(s) arquivo(s) selecionado(s).
+    </p>
+    <p>
+     Se você selecionou apenas um arquivo e possui um aplicativo padrão para esse tipo de documento, aparecerá o botão "Ver arquivo" para abri-lo. Além disso, serão exibidas informações relativas ao arquivo e à assinatura que será gerada (formato, atributos e opções de assinatura). Caso tenha configurado dados para o formato de assinatura selecionado que serão incluídos na própria assinatura, como a política de assinatura, será exibido um link "Ver todos..." para visualizar todos os atributos definidos.
+    </p>
+    <p>
+     Se foram selecionados vários arquivos ou diretórios, você pode dar duplo clique para abri-los ou clicar com o botão direito para ver as opções "Ver arquivo" e "Ver os atributos de assinatura".
+    </p>
+    <p>
+     O botão "Assinar" localizado na parte inferior da tela permitirá assinar o documento. Se o repositório de certificados do seu sistema operacional ainda não tiver terminado de carregar, o botão aparecerá desabilitado e com uma imagem animada de espera. Nesse caso, aguarde até que desapareça e o botão seja habilitado.
+    </p>
+    <p>
+     Após clicar no botão, o programa gerará uma assinatura para cada documento selecionado. Para cada tipo de documento, a assinatura será gerada com o formato definido no <a href="MenuPreferencias.html">painel de preferências</a>.
+    </p>
+    <p>
+     Caso deseje assinar em outro formato diferente o arquivo já selecionado, será possível modificar selecionando o link "(Alterar)" ao lado das informações sobre o formato. Ao selecioná-lo, será aberta a seguinte janela para escolher o formato desejado:
+    </p>
+    <p align="center">
+     <img src="../gfx/dialogocambioformato.png" alt="Tela para seleção do formato de assinatura">
+    </p>
+    <p>
+     Os tipos de documento e os formatos de assinatura suportados são mostrados na tabela a seguir:
+    </p>
+    <table>
+     <tr><th>Tipo de documento</th><th>Ícone</th><th>Formatos de assinatura (em negrito o padrão)</th></tr>
+     <tr><td>PDF</td><td><img src="../../shrd/icon_pdf.png" alt="Ícone de documento Adobe PDF"></td><td><strong>PAdES</strong>, CAdES e XAdES.</td></tr>
+     <tr><td>XML</td><td><img src="../../shrd/icon_xml.png" alt="Ícone de documento XML"></td><td><strong>XAdES</strong> e CAdES.</td></tr>
+     <tr><td>Nota fiscal eletrônica</td><td><img src="../../shrd/icon_facturae.png" alt="Ícone de nota fiscal eletrônica"></td><td><strong>FacturaE</strong>, CAdES e XAdES.</td></tr>
+     <tr><td>OOXML</td><td><img src="../../shrd/icon_office_win.png" alt="Ícone de documento OOXML"></td><td><strong>CAdES</strong>, XAdES e OOXML (Office Open XML).</td></tr>
+     <tr><td>ODF</td><td><img src="../../shrd/icon_openoffice.png" alt="Ícone de documento ODF"></td><td><strong>CAdES</strong>, XAdES e ODF (Open Document Format).</td></tr>
+     <tr><td>Outros documentos</td><td><img src="../../shrd/icon_binary.png" alt="Ícone de documento binário"></td><td><strong>CAdES</strong> e XAdES.</td></tr>
+     <tr><td>Assinatura eletrônica</td><td><img src="../../shrd/icon_sign.png" alt="Ícone de assinatura eletrônica"></td><td>O mesmo da assinatura original.</td></tr>
+    </table>
+    <p>
+    Como exceção a este último caso, não é possível assinar novamente uma nota fiscal eletrônica já assinada no formato Factura-e.
+    </p>
+    <p>
+     Ao assinar arquivos, será exibida uma janela para salvar a assinatura gerada se apenas um documento for selecionado ou um diálogo para selecionar o diretório de saída se vários forem selecionados. Após salvar as assinaturas, será exibida a <a href="PantallaDetalle.html">tela de detalhes da assinatura</a>.
+    </p>
+    <p>
+     O processo de assinatura pode ser alterado pelos plugins instalados no Autofirma. Consulte a seção de <a href="MenuPlugins.html">gestão de plugins</a> para saber mais.
+    </p>
+    <p>
+     Além dos botões e elementos gráficos, você também pode usar a barra de menu ou os seguintes atalhos de teclado:
+    </p>
+    <ul>
+     <li><code>Control (&#x2318; no macOS) + S</code> : Selecionar arquivo.</li>
+     <li><code>Control (&#x2318; no macOS) + F</code> : Assinar o arquivo selecionado.</li>
+    </ul>
+
+    <h3>Configuração dos formatos de assinatura</h3>
+    <p>
+    Você pode configurar o formato de assinatura a ser utilizado para cada tipo de arquivo e as particularidades desses formatos, bem como o comportamento geral do aplicativo, a partir do <a href="MenuPreferencias.html">painel de preferências</a> disponível no menu Opções.
+    </p>
+    <p>
+    Alguns formatos ou opções de assinatura podem fazer aparecer opções de configuração adicionais na própria janela de assinatura:
+    </p>
+    <ul>
+        <li>
+         <h4>Opções de assinatura PDF:</h4>
+         <p>
+             A assinatura PDF de um único documento permite configurar para que a assinatura seja exibida no documento. Para isso, marque a caixa "Tornar a assinatura visível dentro do PDF".
+         </p>
+         <p>
+             Também é possível inserir uma marca visível no PDF ao assinar. Esta opção modificará o PDF adicionando a imagem selecionada e, em seguida, o assinará. Para usar esta função, marque a caixa "Inserir marca visível no PDF". Esta caixa estará desabilitada se o documento PDF já estiver assinado, pois a inserção de uma marca invalidaria as assinaturas anteriores.
+         </p>
+         <p>
+             Outra opção disponível é gerar um PDF certificado, possível se a assinatura a ser realizada for no formato PAdES e o documento não estiver previamente assinado. Isso é feito ao marcar a caixa "Gerar PDF certificado", e o nível de certificação selecionado será aplicado ao documento na lista de opções abaixo dessa caixa. A lista de opções estará desabilitada se a caixa "Gerar PDF certificado" não estiver habilitada.
+         </p>
+         <p>
+             Essas opções aparecerão marcadas ou não por padrão conforme definido no <a href="MenuPreferencias.html">painel de preferências</a>. Ao selecionar qualquer uma dessas caixas, será exibido o painel de <a href="VentanaPdfVisible.html">Propriedades de elementos visíveis em PDF</a>.
+         </p>
+        </li>
+        <li>
+         <h4>Adicionar uma nova assinatura a um documento:</h4>
+         <p>
+             Ao adicionar uma nova assinatura binária ou XML a um documento de assinatura, é possível configurar se a nova assinatura será feita sobre o próprio documento (coassinatura) ou sobre as assinaturas já introduzidas (contrafirma). Esta opção pode ser configurada no painel de preferências dos formatos CAdES e XAdES. Quando aplicável, o Autofirma mostrará ao usuário um botão "Opções Avançadas" para acessar diretamente essas opções de configuração.
+         </p>
+     </li>
+    </ul>
+    <p>
+     Nos processos de assinatura de múltiplos documentos, qualquer configuração que obrigue a interromper o processo de assinatura será omitida. Assim, por exemplo, será omitida a solicitação de senha dos PDFs e a configuração de assinatura visível e marca visível será solicitada uma única vez e aplicada a todos os documentos com a mesma configuração.
+    </p>
+ </body>
+</html>

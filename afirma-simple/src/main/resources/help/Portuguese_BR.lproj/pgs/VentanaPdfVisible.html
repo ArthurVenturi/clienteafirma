@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+ <head>
+    <title>Propriedades das assinaturas e marcas visíveis em PDF</title>
+    <meta name="AppleTitle" content="Ajuda do Autofirma">
+    <meta name="AppleIcon" content="AutofirmaHelpIcon.png">
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+ </head>
+ <body>
+    <h2>Propriedades das assinaturas visíveis em PDF</h2>
+    <p>Ao habilitar a criação de assinaturas visíveis em PDF, o usuário poderá selecionar uma área de assinatura sobre o PDF que será assinado no formato PAdES.</p>
+    <p align="center">
+     <img src="../gfx/menufirmaspadesvisible1_mini.png" alt="Janela de seleção de posição de assinatura">
+    </p>
+    <p>
+    Este menu permite usar o mouse para selecionar uma área retangular de uma das páginas do PDF.
+    </p>
+    <ul>
+        <li><b>X</b>: Número de pixels no eixo X onde começa a área de assinatura.</li>
+        <li><b>Y</b>: Número de pixels no eixo Y onde começa a área de assinatura.</li>
+        <li><b>Largura</b>: Número de pixels que a área de assinatura se estende horizontalmente.</li>
+        <li><b>Altura</b>: Número de pixels que a área de assinatura se estende verticalmente.</li>
+        <li><b>(Pré-visualização da página do PDF)</b>: O usuário deve clicar e arrastar o mouse sobre esta área para selecionar a área visível da assinatura. As posições e o tamanho da área de assinatura são expressos em pixels em relação à escala em que a imagem da página é exibida.</li>
+        <li><b>&lt;&lt;</b>: Botão para mover a visualização para a primeira página do PDF.</li>
+        <li><b>&lt;</b>: Botão para mover a visualização para a página anterior do PDF. Pode-se usar a tecla "seta para a esquerda" do teclado para o mesmo efeito.</li>
+        <li><b>&gt;</b>: Botão para mover a visualização para a próxima página do PDF. Pode-se usar a tecla "seta para a direita" do teclado para o mesmo efeito. Se estiver na última página do PDF, esta opção permitirá criar uma página em branco ao final do documento para inserir a assinatura.</li>
+        <li><b>&gt;&gt;</b>: Botão para mover a visualização para a última página do PDF.</li>
+    </ul>
+    <p>
+    Nesta mesma janela, na parte inferior, é possível indicar a página ou páginas onde a assinatura visível deve aparecer. As opções permitidas são:
+    </p>
+    <ul>
+        <li>
+            <b>Página atual</b>: A assinatura visível aparecerá na página selecionada no seletor de posição superior.
+        </li>
+        <li>
+            <b>Todas as páginas</b>: A assinatura visível aparecerá em todas as páginas do documento.
+        </li>
+        <li>
+            <b>Seleção de páginas</b>: Nesta opção é possível selecionar a página ou intervalo de páginas onde a assinatura visível aparecerá. Para indicar uma página ou várias páginas, basta separar por vírgulas (<code>1,4,7</code>: Aparece nas páginas 1, 4 e 7) ou indicar um intervalo de páginas com um hífen (<code>1-8</code>: Aparece nas páginas de 1 a 8). Também é possível indicar páginas a partir do final do documento usando valores negativos (<code>-2</code>: Aparece na penúltima página). Esses mecanismos podem ser combinados. Por exemplo:
+            <ul>
+                <li><i>3-6, 8, 10--1</i>: Indica que aparecerá nas páginas de 3 a 6, na 8 e da 10 até a última página.</li>
+            </ul>
+        </li>
+    </ul>
+    <p>
+    O botão com um ponto de interrogação (<b>?</b>) permite abrir a página de ajuda para assinatura visível.
+    </p>
+    <p>
+    A área de assinatura desaparece ao mudar de página do PDF. Selecione a área para a assinatura visível do PDF e, em seguida, clique no botão <b>Próximo</b>.
+    </p>
+    <p>
+    Em seguida, será exibida uma nova janela onde o usuário poderá configurar a aparência da assinatura.
+    </p>
+    <p align="center">
+     <img src="../gfx/menufirmaspadesvisible2_mini.png" alt="Janela de configuração da aparência da assinatura">
+    </p>
+    <p>
+    Esta interface permite configurar as seguintes propriedades para a assinatura visível:
+    </p>
+    <ul>
+    <li><b>Pré-visualização</b>. É possível configurar o arquivo de imagem clicando sobre a pré-visualização da assinatura. Não são permitidas imagens com transparência.</li>
+    <li><b>Configuração da assinatura:</b></li>
+    <ul>
+        <li><b>Imagem da assinatura:</b> Caminho da imagem com a rubrica da assinatura. Pode ser selecionada pelo botão <b>Procurar</b> e removida pelo botão <b>Limpar</b>. Imagens com transparência não são permitidas e serão ignoradas se encontradas.</li>
+        <li><b>Texto da assinatura: </b> Texto a ser exibido na assinatura do PDF. Para configurar o texto a ser exibido na assinatura, é possível usar uma série de palavras-chave que serão substituídas pelos textos apropriados do titular ou emissor do certificado de assinatura no momento da assinatura. São elas:</li>
+        <ul>
+            <p><li><b>$$SUBJECTCN$$</b><ul><li>Nome comum (CN, Common Name) dentro do X.500 Principal do titular do certificado de assinatura.</li></ul></li></p>
+            <p><li><b>$$ISSUERCN$$</b><ul><li>Nome comum (CN, Common Name) dentro do X.500 Principal do emissor do certificado de assinatura.</li></ul></li></p>
+            <p><li><b>$$CERTSERIAL$$</b><ul><li>Número de série do certificado de assinatura.</li></ul></li></p>
+            <p><li><b>$$SIGNDATE=PADRÃO$$</b><ul><li>Data da assinatura, onde PADRÃO deve indicar o formato em que a data deve ser exibida, seguindo o esquema definido pela Oracle para a classe SimpleDateFormat.</li></ul></li></p>
+            <p><li><b>$$GIVENNAME$$</b><ul><li>Nome do titular (G, Given Name) declarado no certificado. Este valor pode não aparecer no certificado, caso em que o padrão será substituído por uma string vazia.</li></ul></li></p>
+            <p><li><b>$$SURNAME$$</b><ul><li>Sobrenome do titular (SN, Surname) declarado no certificado. Este valor pode não aparecer no certificado, caso em que o padrão será substituído por uma string vazia.</li></ul></li></p>
+            <p><li><b>$$ORGANIZATION$$</b><ul><li>Organização (O, Organization) do titular declarada no certificado. Este valor pode não aparecer no certificado, caso em que o padrão será substituído por uma string vazia.</li></ul></li></p>
+            <p><li><b>$$PSEUDONYM$$</b><ul><li>Pseudônimo do certificado. Este valor pode não aparecer no certificado, caso em que o padrão será substituído por uma string vazia.</li></ul></li></p>
+            <p><li><b>$$OU$$</b><ul><li>Unidade Organizacional (OU, Organization Unit) do certificado. Este valor pode não aparecer no certificado, caso em que o padrão será substituído por uma string vazia.</li></ul></li></p>
+            <p><li><b>$$OUS$$</b><ul><li>Lista de Unidades Organizacionais do certificado. Caso haja mais de uma, todas serão apresentadas separadas por ", ". O certificado pode não ter Unidades Organizacionais definidas, caso em que o padrão será substituído por uma string vazia.</li></ul></li></p>
+            <p><li><b>$$TITLE$$</b><ul><li>Informação sobre o cargo ou função do titular do certificado. Este valor pode não aparecer no certificado, caso em que o padrão será substituído por uma string vazia.</li></ul></li></p>
+            <p><li><b>$$REASON$$</b><ul><li>Razão pela qual o PDF é assinado, configurada na operação de assinatura pela propriedade "signatureReason". O padrão será substituído por uma string vazia se este valor não for definido.</li></ul></li></p>
+            <p><li><b>$$LOCATION$$</b><ul><li>Cidade onde o PDF é assinado, configurada na operação de assinatura pela propriedade "signatureProductionCity". O padrão será substituído por uma string vazia se este valor não for definido.</li></ul></li></p>
+            <p><li><b>$$CONTACT$$</b><ul><li>Informação de contato do signatário do PDF, configurada na operação de assinatura pela propriedade "signatureContact". O padrão será substituído por uma string vazia se este valor não for definido.</li></ul></li></p>
+        </ul>
+        <li>O texto pode ter as seguintes opções de formatação:</li>
+        <ul>
+            <li>Fonte.</li>
+            <li>Tamanho da fonte.</li>
+            <li>Rotação do texto.</li>
+            <li>Estilo da fonte (Negrito, Itálico, Sublinhado ou Tachado).</li>
+            <li>Cor do texto.</li>
+        </ul>
+        <p>A caixa "Lembrar configuração" permite salvar a configuração estabelecida (texto, imagem e estilos) para uso nas próximas assinaturas. O botão "Restaurar configuração padrão" retorna a configuração do painel aos valores padrão.</p>
+    </ul>
+    <p>
+    Se não desejar adicionar uma assinatura visível ao PDF, antes de clicar no botão assinar na tela de assinatura, certifique-se de que a caixa "Tornar a assinatura visível dentro do PDF" não está selecionada.
+    </p>
+    <br>
+    <h2>Propriedades das marcas visíveis</h2>
+    <p>Ao habilitar a inserção de marcas visíveis no PDF, o usuário poderá selecionar uma área sobre o PDF que será assinado.</p>
+    <p align="center">
+     <img src="../gfx/menufirmaspadesvisible3_mini.png" alt="Janela de seleção de posição de marca">
+    </p>
+    <p>
+    Este menu permite usar o mouse para selecionar uma área retangular em uma ou todas as páginas do PDF.
+    </p>
+    <ul>
+        <li><b>Selecionar imagem:</b> Ao clicar neste botão, será aberta uma janela onde é possível selecionar a imagem da marca. Imagens com transparência não são permitidas e serão ignoradas se encontradas.</li>
+        <li><b>X</b>: Número de pixels no eixo X onde a marca será posicionada.</li>
+        <li><b>Y</b>: Número de pixels no eixo Y onde a marca será posicionada.</li>
+        <li><b>Largura</b>: Número de pixels que a marca deve se estender horizontalmente.</li>
+        <li><b>Altura</b>: Número de pixels que a marca deve se estender verticalmente.</li>
+        <li><b>(Pré-visualização da página do PDF):</b> O usuário deve clicar e arrastar o mouse sobre esta área para selecionar a área onde a marca será colocada.</li>
+        <li><b>&lt;&lt;:</b> Botão para mover a visualização para a primeira página do PDF.</li>
+        <li><b>&lt;:</b> Botão para mover a visualização para a página anterior do PDF. Pode-se usar a tecla "seta para a esquerda" do teclado para o mesmo efeito.</li>
+        <li><b>&gt;:</b> Botão para mover a visualização para a próxima página do PDF. Pode-se usar a tecla "seta para a direita" do teclado para o mesmo efeito.</li>
+        <li><b>&gt;&gt;:</b> Botão para mover a visualização para a última página do PDF.</li>
+        <li><b>Incluir imagem em todas as páginas:</b> Caixa para selecionar que a marca seja inserida em todas as páginas do PDF.</li>
+    </ul>
+    <p>
+    A área da marca desaparece ao mudar de página do PDF. Selecione a página, imagem e área para a marca visível no PDF e, em seguida, clique no botão <b>Aceitar</b>.
+    </p>
+    <p>
+    Se não desejar adicionar uma marca visível ao PDF, antes de clicar no botão assinar na tela de assinatura, certifique-se de que a caixa "<b>Inserir uma marca visível dentro do PDF</b>" não está selecionada.
+    </p>
+ </body>
+</html>

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
@@ -58,7 +58,8 @@
 		<spongycastle.version>1.58.0.0</spongycastle.version>
 		<afirma.legible.version>1_8_0</afirma.legible.version>
 		<project.build.sourceEncoding>utf-8</project.build.sourceEncoding>
-
+		
+		
 		<jdk.version>1.7</jdk.version>
 		
 		<junit.version>4.13.2</junit.version>
@@ -159,7 +160,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-jar-plugin</artifactId>
-					<version>3.3.0</version>
+					<version>3.4.0</version>
 				</plugin>
 			</plugins>
 		</pluginManagement>
@@ -183,7 +184,6 @@
 				<module>afirma-crypto-cades</module>
 				<module>afirma-crypto-cades-multi</module>
 				<module>afirma-crypto-cms</module>
-				<module>afirma-crypto-core-pkcs7-tsp</module>
 				<module>afirma-crypto-core-xml</module>
 				<module>afirma-crypto-odf</module>
 				<module>afirma-crypto-padestri-client</module>
@@ -229,7 +229,23 @@
 							<debug>false</debug>
 						</configuration>
 					</plugin>
-
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<version>3.1.0</version>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+							</execution>
+						</executions>
+						<configuration>
+							<keyname>C59364813ABE5BBA635CF70B1ADB878A978FEC69</keyname>
+						</configuration>
+					</plugin>
 				</plugins>
 			</build>
 	    </profile>
@@ -358,12 +374,10 @@
 				<module>afirma-core-prefs</module>
 				<module>afirma-crypto-batch-client</module>
 				<module>afirma-crypto-cadestri-client</module>
-				<module>afirma-crypto-cipher</module>
 				<module>afirma-crypto-core-pkcs7</module>
 				<module>afirma-crypto-cades</module>
 				<module>afirma-crypto-cades-multi</module>
 				<module>afirma-crypto-cms</module>
-				<module>afirma-crypto-core-pkcs7-tsp</module>
 				<module>afirma-crypto-core-xml</module>
 				<module>afirma-crypto-odf</module>
 				<module>afirma-crypto-padestri-client</module>
@@ -374,7 +388,6 @@
 				<module>afirma-crypto-xadestri-client</module>
 				<module>afirma-crypto-xmlsignature</module>
 				<module>afirma-crypto-ooxml</module>
-				<module>afirma-crypto-jarverifier</module>
 				<module>afirma-keystores-filters</module>
 				<module>afirma-keystores-mozilla</module>
 				<module>afirma-keystores-jmulticard-ui</module>
@@ -452,7 +465,6 @@
 				<module>afirma-crypto-cades</module>
 				<module>afirma-crypto-cades-multi</module>
 				<module>afirma-crypto-cms</module>
-				<module>afirma-crypto-core-pkcs7-tsp</module>
 				<module>afirma-crypto-core-xml</module>
 				<module>afirma-crypto-odf</module>
 				<module>afirma-crypto-padestri-client</module>
@@ -480,7 +492,6 @@
 				<module>afirma-simple-plugin-validatecerts</module>
 				
 				<!-- Aplicaciones -->
-				<module>afirma-ui-miniapplet</module>
 				<module>afirma-simple</module>
 				<module>afirma-ui-simple-configurator</module>
 				
@@ -495,7 +506,7 @@
 					<plugin>
 					  <groupId>org.apache.maven.plugins</groupId>
 					  <artifactId>maven-source-plugin</artifactId>
-					  <version>2.2.1</version>
+					  <version>2.1.2</version>
 					  <executions>
 						<execution>
 						  <id>attach-sources</id>
@@ -508,7 +519,7 @@
 					<plugin>
 					  <groupId>org.apache.maven.plugins</groupId>
 					  <artifactId>maven-javadoc-plugin</artifactId>
-					  <version>2.9.1</version>
+					  <version>2.7</version>
 					  <executions>
 						<execution>
 						  <id>attach-javadocs</id>
@@ -540,21 +551,6 @@
 						<configuration>
 							<tagNameFormat>${project.name}_@{project.version}</tagNameFormat>
 						</configuration>
-					</plugin>
-
-					<plugin>
-					  <groupId>org.apache.maven.plugins</groupId>
-					  <artifactId>maven-gpg-plugin</artifactId>
-					  <version>3.1.0</version>
-					  <executions>
-						<execution>
-						  <id>sign-artifacts</id>
-						  <phase>verify</phase>
-						  <goals>
-							<goal>sign</goal>
-						  </goals>
-						</execution>
-					  </executions>
 					</plugin>
 				</plugins>
 			</build>

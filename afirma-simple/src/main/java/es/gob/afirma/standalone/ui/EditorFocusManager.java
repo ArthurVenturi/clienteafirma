@@ -90,14 +90,14 @@ public final class EditorFocusManager extends KeyAdapter implements FocusListene
         	foregroundColor = UIManager.getColor("TREE.selectionForeground"); //$NON-NLS-1$
         }
         catch (final Throwable e) {
-        	backgroundColor = Color.WHITE;
-        	selecctionBackgroundColor = Color.WHITE;
-        	foregroundColor = Color.WHITE;
+        	backgroundColor = Color.BLACK;
+        	selecctionBackgroundColor = Color.BLACK;
+        	foregroundColor = Color.BLACK;
 		}
 
         StyleConstants.setBackground(
     		this.linkUnfocusedStyle,
-    		backgroundColor != null ? backgroundColor : Color.WHITE
+    		backgroundColor != null ? backgroundColor : Color.BLACK
 		);
         this.linkFocusedStyle = sc.addStyle("linkFocused", sc.getStyle(StyleContext.DEFAULT_STYLE)); //$NON-NLS-1$
         StyleConstants.setBackground(

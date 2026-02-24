@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+ <head>
+    <title>Restaurar instalação</title>
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+    <meta name="KEYWORDS" content="Restaurar, Instalação">
+    <meta name="description" content="Restaurar instalação.">
+ </head>
+ <body>
+    <h2>Painel de restauração da instalação</h2>
+    <p>
+    Neste painel é possível restaurar a instalação do Autofirma para corrigir problemas que afetem a comunicação entre os navegadores web e o aplicativo. Os casos mais comuns são: foi instalado um novo navegador web após a instalação do Autofirma, foram criados mais usuários no computador ou mais perfis de usuário para um navegador, o perfil de um usuário foi redefinido, etc.
+    </p>
+    <p align="center">
+        <img src="../gfx/menurestaurar_mini.png" alt="Tela para restaurar a instalação">
+    </p>
+    <h3>Opções disponíveis no painel:</h3>
+    <ul>
+     <li><b>Configurar o Firefox para confiar nos certificados raiz do sistema:</b>
+        <p>Ao ativar esta opção (apenas disponível no Windows e macOS) é permitido que o processo de restauração configure o Firefox de forma que o navegador confie nos certificados instalados no repositório de certificados raiz do sistema (Autoridades de confiança). Assim, o Autofirma continuará funcionando neste navegador mesmo que novos perfis sejam configurados, o perfil seja limpo ou o certificado de confiança seja removido do repositório do navegador. Se esta caixa for desativada, esta configuração será removida caso já esteja estabelecida.</p>
+     </li>
+    </ul>
+    <p>Ao clicar no botão "Iniciar restauração" será iniciado o processo de restauração.</p>
+    <p><b>AVISO PARA USUÁRIOS DO MICROSOFT WINDOWS:</b> Se ao executar o processo de instalação aparecer uma mensagem indicando "A execução do código não pode continuar porque VCRUNTIME140.dll não foi encontrado. Este problema pode ser resolvido reinstalando o programa", será necessário instalar o <a target="_blank" href="https://www.microsoft.com/es-es/download/details.aspx?id=48145">runtime redistribuível do Microsoft Visual C++ 2015</a> e executar novamente a operação para completar a restauração.</p>
+ </body>
+</html>

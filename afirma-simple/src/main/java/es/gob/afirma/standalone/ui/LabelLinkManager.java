@@ -70,7 +70,7 @@ public final class LabelLinkManager extends KeyAdapter implements FocusListener,
     public void focusGained(final FocusEvent e) {
     	this.label.setOpaque(true);
     	if (!LookAndFeelManager.WINDOWS_HIGH_CONTRAST) {
-        	this.label.setForeground(Color.WHITE);
+        	this.label.setForeground(Color.BLACK);
     	} else {
         	this.label.setForeground(Color.YELLOW);
     	}

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+ <head>
+    <title>Plugins</title>
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+    <meta name="KEYWORDS" content="plugin, hash">
+    <meta name="description" content="Plugins.">
+ </head>
+ <body>
+    <h2>Plugins</h2>
+    <p>
+    Junto com o Autofirma são distribuídos diversos plugins que permitem adicionar funções adicionais ao aplicativo.
+    </p>
+    <h3>Cálculo e verificação de hashes</h3>
+    <p>
+    Este plugin adiciona ao Autofirma opções para calcular o hash de um arquivo ou de todos os arquivos de um diretório e verificar esses mesmos hashes que foram gerados.
+    </p>
+    <p>
+    Uma vez instalado o plugin, aparecerá na barra de menus do Autofirma a opção "Hashes digitais" com as diferentes operações que podem ser realizadas.
+    </p>
+    <ul>
+        <li><b>Calcular hash digital:</b> Permite calcular o hash de um arquivo e salvá-lo em disco. O formato e a extensão do arquivo de hash variarão conforme o formato selecionado.</li>
+        <p align="center">
+            <img src="../gfx/pluginhash_calculo_fichero_mini.png" alt="Tela de cálculo de arquivos">
+        </p>
+        <ul>
+            <li><b>Arquivo para calcular o hash:</b> Arquivo do qual desejamos calcular o hash.</li>
+            <li><b>Algoritmo de hash:</b> Algoritmo de hash.</li>
+            <li><b>Formato do hash:</b> Codificação utilizada para salvar o hash:
+                <ul>
+                    <li>Hexadecimal em ASCII (Base16): O hash será armazenado como uma cadeia hexadecimal terminada em 'h'.</li>
+                    <li>Base64: O hash será armazenado em Base 64.</li>
+                    <li>Binário: O hash será armazenado sem codificação.</li>
+                </ul>
+            </li>
+            <li><b>Copiar hash para a área de transferência:</b> Ao ativar esta opção, além de salvar o hash em arquivo, ele será copiado para a área de transferência. O hash será copiado com a codificação do formato selecionado ou, se o formato binário for selecionado, em hexadecimal.</li>
+        </ul>
+        <br>
+        <li><b>Verificar hash digital:</b> Permite verificar o hash de um arquivo.</li>
+        <p align="center">
+            <img src="../gfx/pluginhash_comprobacion_fichero_mini.png" alt="Tela de verificação de arquivos">
+        </p>
+        <ul>
+            <li><b>Arquivo de dados:</b> Arquivo ao qual corresponde o hash que se deseja verificar.</li>
+            <li><b>Arquivo que contém o hash:</b> Arquivo com o hash.</li>
+        </ul>
+        <br>
+        <li><b>Calcular hash digital em diretório:</b> Permite calcular o hash dos arquivos de um diretório.</li>
+        <p align="center">
+            <img src="../gfx/pluginhash_calculo_directorio_mini.png" alt="Tela de cálculo de hash de diretório">
+        </p>
+        <ul>
+            <li><b>Diretório para calcular os hashes:</b> Diretório com os arquivos dos quais queremos calcular o hash.</li>
+            <li><b>Algoritmo de hash:</b> Algoritmo de hash.</li>
+            <li><b>Recursivo:</b> Ao ativar, também será calculado o hash dos arquivos localizados nos subdiretórios do diretório selecionado.</li>
+        </ul>
+        <br>
+        <li><b>Verificar hash digital em diretório:</b> Permite verificar o hash dos arquivos de um diretório.</li>
+        <p align="center">
+            <img src="../gfx/pluginhash_comprobacion_directorio_mini.png" alt="Tela de verificação de hash de diretório">
+        </p>
+        <ul>
+            <li><b>Diretório:</b> Diretório com os arquivos aos quais correspondem os hashes que se deseja verificar.</li>
+            <li><b>Arquivo de hashes:</b> Arquivo com os hashes que serão verificados.</li>
+        </ul>
+    </ul>
+    <p>
+    Ao instalar o plugin de hashes digitais em sistemas Windows, também são adicionadas as opções de gerar e verificar hashes digitais no menu de contexto de arquivos e diretórios do sistema.
+    </p>
+    <p>As opções que aparecem são:</p>
+    <ul>
+        <li><b>Gerar hash digital:</b> Esta opção aparece no menu de contexto de todos os arquivos e diretórios e permite gerar o hash do arquivo ou dos arquivos do diretório.</li>
+        <li><b>Verificar hash digital:</b> Esta opção aparece no menu de contexto dos arquivos de hash (.hash, .hashb64, .hashfiles e .hexhash) e permite selecionar o arquivo ou diretório do qual se deseja verificar o hash.</li>
+    </ul>
+ </body>
+</html>

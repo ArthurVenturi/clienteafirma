@@ -39,11 +39,14 @@ public final class LookAndFeelManager {
     /** Color de fondo por defecto para los JPanel, JFrame y Applet. */
     public static final Color DEFAULT_COLOR;
 
+    /** Color para fuentes destacadas (highlight). */
+    public static final Color HIGHLIGHT_FONT_COLOR; // #C33400
+
     /** Color de fondo secundario para los JPanel, JFrame y Applet. */
     public static final Color SECUNDARY_COLOR;
 
     /** Color transparente. */
-    public static final Color TRANSPARENT_COLOR = new Color(255, 255, 255, 0);
+    public static final Color TRANSPARENT_COLOR = new Color(255, 255, 255, 0); // #FFFFFF00;
 
     /** Indica si se detecta el uso de Windows en modo alto contraste. */
     public static final boolean WINDOWS_HIGH_CONTRAST;
@@ -63,19 +66,10 @@ public final class LookAndFeelManager {
 
     static {
 
-    	// Obtenemos el color de la ventanas. Se protege porque puede producir errores en
-    	// algunas distribuciones de Linux
-    	Color windowColor;
-    	try {
-	    	 windowColor = UIManager.getColor("window") != null ? //$NON-NLS-1$
-	    			 new Color(UIManager.getColor("window").getRGB()) : //$NON-NLS-1$
-	    			 new Color(238, 238, 238);
-    	}
-    	catch (final Throwable e) {
-    		windowColor = new Color(238, 238, 238);
-		}
-    	DEFAULT_COLOR = windowColor;
-
+        // Usamos un color oscuro con buen contraste para el fondo de ventanas
+        DEFAULT_COLOR = new Color(34, 34, 34); // #222222, buen contraste con blanco y gris claro
+        HIGHLIGHT_FONT_COLOR = new Color(0xC3, 0x34, 0x00); // #C33400
+        
         final Object highContrast = Toolkit.getDefaultToolkit().getDesktopProperty("win.highContrast.on"); //$NON-NLS-1$
         if (highContrast instanceof Boolean) {
             WINDOWS_HIGH_CONTRAST = ((Boolean) highContrast).booleanValue();

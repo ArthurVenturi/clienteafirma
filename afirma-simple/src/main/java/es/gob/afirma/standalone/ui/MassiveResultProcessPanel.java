@@ -105,9 +105,7 @@ final class MassiveResultProcessPanel extends JPanel {
         dirPathPanel.setFocusable(true);
         dirPathPanel.getAccessibleContext().setAccessibleDescription(SimpleAfirmaMessages.getString("MassiveResultProcessPanel.3") + outDir.getAbsolutePath()); //$NON-NLS-1$
 
-        if (!LookAndFeelManager.WINDOWS_HIGH_CONTRAST) {
-            dirPathPanel.setBackground(LookAndFeelManager.SECUNDARY_COLOR);
-        }
+		dirPathPanel.setBackground(Color.BLACK);
 
         // Boton de apertura del fichero firmado
         JButton openDirButton;
@@ -276,9 +274,7 @@ final class MassiveResultProcessPanel extends JPanel {
         // Establecemos la configuracion de color cuando no se encuentra
         // activado el alto contraste y estamos en Windows (en donde se
         // utiliza un Look&Feel determinado)
-        if (!LookAndFeelManager.WINDOWS_HIGH_CONTRAST && Platform.getOS() == Platform.OS.WINDOWS) {
-            setBackground(LookAndFeelManager.SECUNDARY_COLOR);
-        }
+		setBackground(Color.BLACK);
 
         setLayout(new GridBagLayout());
 

@@ -144,7 +144,7 @@ public final class CertificateSelectionDialog extends MouseAdapter {
 			title
 		);
 
-		this.certDialog.setBackground(Color.WHITE);
+		this.certDialog.setBackground(Color.BLACK);
 		this.certDialog.setModal(true);
 		this.certDialog.setAlwaysOnTop(alwaysOnTop);
 

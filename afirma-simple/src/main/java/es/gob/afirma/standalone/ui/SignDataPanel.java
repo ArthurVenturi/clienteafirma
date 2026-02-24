@@ -92,10 +92,8 @@ final class SignDataPanel extends JPanel {
 
     void createUI(final File signFile, final byte[] sign, final JComponent fileTypeIcon, final X509Certificate cert, final KeyListener extKeyListener, final Properties params) {
 
-    	// Color de fondo
-    	if (!LookAndFeelManager.WINDOWS_HIGH_CONTRAST && Platform.getOS() == Platform.OS.WINDOWS) {
-            setBackground(LookAndFeelManager.DEFAULT_COLOR);
-    	}
+        // Color de fondo
+        setBackground(Color.BLACK);
 
         // Texto con la ruta del fichero
         final JLabel filePath = new JLabel();

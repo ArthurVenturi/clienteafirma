@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+ <head>
+    <title>Gestão de plugins</title>
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+    <meta name="KEYWORDS" content="assinar, CAdES, XAdES, PAdES, OOXML, ODF, formato">
+    <meta name="description" content="Gestão de plugins.">
+ </head>
+ <body>
+    <h2>Painel de gestão de plugins</h2>
+    <p>
+    O Autofirma integra um sistema simples de plugins que permite aos usuários integrar em seus processos de assinatura plugins desenvolvidos por eles mesmos ou por terceiros. Esses plugins permitem integrar um pré-processamento dos dados antes de assinar, um pós-processamento após a assinatura e diferentes operações desvinculadas do processo de assinatura, mas que podem ter como entrada os dados carregados pelo usuário, a assinatura gerada, os certificados utilizados para assinar ou os próprios certificados contidos nas assinaturas. Esses processos só atuam sobre as operações de assinatura e assinatura em lote realizadas pela interface do Autofirma. Não se aplicam às assinaturas solicitadas a partir de um navegador web ou por linha de comando.
+    </p>
+    <p>
+    <b>NOTA:</b> Algumas funcionalidades anteriormente integradas no Autofirma, como o <a href="Plugins.html">cálculo e verificação de hashes</a>, agora são distribuídas como plugins. Para ter acesso a essas funções pela interface gráfica do Autofirma, menu de contexto do sistema operacional ou linha de comando, será necessário instalar esses <a href="Plugins.html">plugins</a>.
+    </p>
+    <p>
+    Para gerenciar os plugins instalados no Autofirma, acesse o painel de gestão através da opção "Ferramentas" &rarr; "Gerenciar plugins" na barra de menu do aplicativo. Neste painel você poderá instalar, desinstalar, configurar e consultar informações dos plugins.
+    </p>
+    <p align="center">
+        <img src="../gfx/menuplugins_mini.png" alt="Tela para gestão de plugins">
+    </p>
+    <h3>Opções disponíveis no painel:</h3>
+    <ul>
+     <li><b>Plugins instalados:</b>
+        <p>Neste quadro é exibida uma lista com os plugins atualmente instalados no Autofirma. Você pode clicar no botão "Adicionar" na parte inferior da lista para instalar um novo plugin ou no botão "Remover" para desinstalar o plugin selecionado na lista. A instalação e remoção de plugins tem efeito imediato. Ao selecionar um plugin da lista, serão exibidas as informações do mesmo no painel "Informações do plugin".</p>
+     </li>
+     <li><b>Informações do plugin</b>
+        <p>Neste painel são exibidas as informações do plugin selecionado na lista "Plugins instalados". Essas informações incluem o número da versão do plugin, os autores, informações de contato e uma descrição. Alguns desses dados podem ser omitidos se o plugin não informar.</p>
+        <p>Opcionalmente, se o plugin permitir, pode aparecer um botão "Configurar" na parte inferior do painel. Este botão abre o diálogo de configuração definido pelo próprio plugin. Se um plugin não permitir configuração, este botão não aparecerá.</p>
+     </li>
+    </ul>
+    <p>Os plugins podem definir certos permissões e realizar diversas tarefas para sua instalação e remoção. É possível que alguns plugins não tenham efeito até que o aplicativo seja reiniciado.</p>
+ </body>
+</html>

@@ -841,7 +841,7 @@ final class SignPdfUiPanel extends JPanel implements
 				this.pdfPages.get(0).getType()
 	        );
 			final Graphics2D ig2 = bi.createGraphics();
-			ig2.setPaint (Color.WHITE);
+			ig2.setPaint (Color.BLACK);
 			ig2.fillRect (0, 0, bi.getWidth(), bi.getHeight());
 			ig2.dispose();
 

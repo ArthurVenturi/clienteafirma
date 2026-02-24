@@ -386,7 +386,7 @@ final class SignPdfUiPanelPreview extends JPanel implements KeyListener {
 		final Set<AWTKeyStroke> backwardKeys = new HashSet<>(this.signatureText.getFocusTraversalKeys(KeyboardFocusManager.BACKWARD_TRAVERSAL_KEYS));
 		backwardKeys.add(AWTKeyStroke.getAWTKeyStroke(KeyEvent.VK_TAB, InputEvent.SHIFT_DOWN_MASK));
 		this.signatureText.setFocusTraversalKeys(KeyboardFocusManager.BACKWARD_TRAVERSAL_KEYS, backwardKeys);
-		this.signatureText.setBackground(Color.WHITE);
+		this.signatureText.setBackground(Color.BLACK);
 		this.signatureText.setText(SignPdfUiMessages.getString("SignPdfUiPreview.25")); //$NON-NLS-1$
 		this.signatureText.setLineWrap(true);
 		this.signatureText.setWrapStyleWord(true);
@@ -1115,7 +1115,7 @@ final class SignPdfUiPanelPreview extends JPanel implements KeyListener {
             BufferedImage.TYPE_INT_RGB
         );
 		final Graphics2D ig2 = bi.createGraphics();
-		ig2.setPaint (Color.WHITE);
+		ig2.setPaint (Color.BLACK);
 		ig2.fillRect (0, 0, bi.getWidth(), bi.getHeight());
 		ig2.dispose();
 		this.baseImage = bi;

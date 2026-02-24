@@ -1,0 +1,3 @@
+certutil -d sql:/home/arthur/.pki/nssdb -A -n "SocketAutoFirma" -i /home/arthur/projetosBit/clienteafirma/afirma-simple-installer/Autofirma32/Autofirma_ROOT.cer -t "TCP,TCP,TCP" 
+certutil -A -d sql:/home/arthur/snap/firefox/common/.mozilla/firefox/3tigc6wd.arthur -i /home/arthur/projetosBit/clienteafirma/afirma-simple-installer/Autofirma32/Autofirma_ROOT.cer -n "SocketAutoFirma" -t "C,," 
+certutil -A -d sql:/home/arthur/snap/firefox/common/.mozilla/firefox/4ksrof5r.default -i /home/arthur/projetosBit/clienteafirma/afirma-simple-installer/Autofirma32/Autofirma_ROOT.cer -n "SocketAutoFirma" -t "C,," 

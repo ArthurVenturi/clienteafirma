@@ -1,0 +1,269 @@
+<html lang="pt-BR">
+ <head>
+    <title>Menu Preferências</title>
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+    <meta name="KEYWORDS" content="assinar, CAdES, XAdES, PAdES, OOXML, ODF, formato">
+    <meta name="description" content="Menu preferências.">
+ </head>
+<body>
+<div style="padding: 0 10px 10px 10px; max-width: 400px;">
+   <label for="langDropdown"><b>Idioma / Language:</b></label>
+   <select id="langDropdown" onchange="setLanguage(this.value)" style="width: 100%; margin-bottom: 10px;">
+      <option value="es_ES">Español</option>
+      <option value="pt_BR">Português (Brasil)</option>
+   </select>
+</div>
+<script>
+   // Supported languages
+   var languages = {
+      "es_ES": { label: "Español", folder: "Spanish.lproj/" },
+      "pt_BR": { label: "Português (Brasil)", folder: "Portuguese_BR.lproj/" }
+   };
+   // Default language
+   var lg = localStorage.getItem('afirma_help_lang') || "pt_BR";
+
+   function setLanguage(newLang) {
+      lg = newLang;
+      localStorage.setItem('afirma_help_lang', newLang);
+      // Redirect to the same page in the selected language
+      var page = window.location.pathname.split('/').pop();
+      var folder = languages[newLang] ? languages[newLang].folder : languages["es_ES"].folder;
+      window.location.href = window.location.href.replace(/Portuguese_BR\.lproj|Spanish\.lproj/, folder.replace('/', ''));
+   }
+
+   document.addEventListener('DOMContentLoaded', function() {
+      var dropdown = document.getElementById('langDropdown');
+      if (dropdown) dropdown.value = lg;
+   });
+</script>
+    <h2>Menu Preferências</h2>
+    <p>
+    Para configurar as assinaturas geradas pela ferramenta, acesse o menu de configuração através da opção "Ferramentas" -> "Preferências" na barra de menus do aplicativo. Neste menu você pode configurar o comportamento geral do aplicativo e as assinaturas geradas para cada tipo de formato.
+    </p>
+    <p>
+    Se clicar no botão "Cancelar" em qualquer uma das abas do menu, ele será fechado ignorando qualquer alteração feita; se clicar no botão "Aceitar" o menu será fechado mantendo as opções definidas e se clicar no botão "Aplicar agora", as alterações serão aplicadas sem fechar o menu.
+    </p>
+    <h3>Menu "Geral"</h3>
+    <p align="center">
+        <img src="../gfx/menugeneral_mini.png" alt="Tela para configuração do comportamento geral do aplicativo">
+    </p>
+    <ul>
+     <li><b>Opções gerais:</b>
+        <ul>
+         <li><b>Importar configuração geral do aplicativo:</b> Opção para importar um arquivo de configuração fornecido por um administrador.</li>
+         <li><b>Restaurar configuração geral do aplicativo:</b> Opção para restaurar a configuração padrão do aplicativo.</li>
+         <li><b>Não pedir confirmação ao fechar o aplicativo:</b> Permite sair do aplicativo sem confirmação do usuário.</li>
+         <li><b>Buscar atualizações ao iniciar:</b> Permite configurar se devem ser buscadas atualizações disponíveis ao iniciar o aplicativo.</li>
+         <li><b>Habilitar JMulticard para uso dos cartões FNMT e DNIe:</b> Apenas no Windows e Linux. Configura se deve ser utilizado o driver integrado do Autofirma para uso dos cartões FNMT e DNIe. Se desativado, serão utilizados os drivers encontrados no sistema. O uso desta função permite usar cartões compatíveis quando o usuário não tem o driver instalado ou existe alguma incompatibilidade. Esta função pode fazer com que o usuário seja solicitado várias vezes a inserir o PIN do cartão em processos de assinatura em lote. Esta configuração só terá efeito na próxima vez que o aplicativo for aberto.</li>
+         <li><b>Funcionamento otimizado para VDI:</b> Apenas no Windows. Configura a comunicação por WebSockets com o navegador para evitar bloqueios ao usar o Autofirma em ambiente VDI. No entanto, esta configuração pode tornar a comunicação mais lenta quando a quantidade de dados a transmitir for grande, por isso não é recomendada em outros ambientes.</li>
+        </ul>
+     </li>
+     <li><b>Opções de assinatura:</b>
+        <ul>
+         <li><b>Algoritmo de assinatura:</b> Algoritmo padrão utilizado pelo aplicativo para gerar assinaturas eletrônicas.</li>
+         <li><b>Formatos de assinatura:</b> Configura qual formato de assinatura deve ser aplicado para cada tipo de documento. Ao clicar no botão "Configurar formatos" é exibido um diálogo com os tipos de documento para os quais é possível configurar um formato de assinatura específico:
+            <ul>
+             <li>Documentos PDF</li>
+             <li>Documentos OOXML do Microsoft Office</li>
+             <li>Notas fiscais eletrônicas</li>
+             <li>Arquivos XML genéricos</li>
+             <li>Arquivos ODF do LibreOffice ou OpenOffice</li>
+             <li>Outros arquivos</li>
+            </ul>
+            <p>Qualquer um desses tipos de arquivo pode ser assinado com os formatos CAdES e XAdES (de acordo com a configuração estabelecida nas abas correspondentes) e alguns deles podem ser assinados em formatos específicos.<br>
+            O tipo de documento "Outros arquivos" refere-se a qualquer documento que não esteja em nenhuma das categorias anteriores.
+            </p>
+            <p><b><u>AVISO:</u></b> Não é recomendado modificar para que as notas fiscais eletrônicas sejam assinadas em formato diferente do de nota fiscal eletrônica.</p>
+         <li><b>Solicitar confirmação para assinar:</b> Quando esta opção está habilitada, é solicitada confirmação ao usuário antes de assinar.</li>
+         <li><b>Permitir adicionar novas assinaturas a documentos com assinaturas inválidas:</b> Ao habilitar esta opção, o Autofirma não impedirá adicionar novas assinaturas (coassinatura ou contrafirma) a documentos que já possuam assinaturas inválidas (corrompidas ou com certificados expirados).</li>
+         <li><b>Sobrescrever arquivos no diretório de saída:</b> Opção para configurar se, ao gerar a estrutura de diretórios de assinaturas resultante de um processo de assinatura em lote, e caso seja encontrado um arquivo com o mesmo nome do que será salvo, o arquivo existente será sobrescrito pelo novo arquivo de assinatura ou a assinatura será salva com um novo nome.</li>
+        </ul>
+     </li>
+     <li><b>Configuração de rede:</b>
+        <ul>
+         <li><b>Aceitar apenas conexões com sites seguros (Recomendado):</b> Se esta opção estiver ativada, será verificada a confiança do certificado SSL dos sites aos quais o aplicativo deve se conectar. Se trabalhar com sites com certificado SSL não reconhecido, talvez seja necessário desabilitar esta opção.</li>
+        </ul>
+        <ul>
+         <li><b>Domínios seguros:</b> Opção para configurar uma lista de domínios que o Autofirma tratará como seguros ao conectar via SSL. Para saber mais, consulte a página <a href="VentanaListaBlancaDominios.html">Configuração de lista branca de domínios</a>.</li>
+        </ul>
+        <ul>
+         <li><b>Configurar proxy:</b> Opção para configurar o proxy para todas as conexões de rede do Autofirma. Para saber mais, consulte a página <a href="VentanaConfigurarProxy.html">Configuração do proxy de rede</a>.</li>
+        </ul>
+        <ul>
+         <li><b>Certificados confiáveis:</b> Opção para configurar certificados confiáveis em conexões de rede. Para saber mais, consulte a página <a href="VentanaCertificadosConfianza.html">Certificados confiáveis</a>.</li>
+        </ul>
+     </li>
+    </ul>
+    <h3>Menu "Assinaturas PAdES (PDF)"</h3>
+    <p align="center">
+        <img src="../gfx/menufirmaspades_mini.png" alt="Tela para configuração das assinaturas de documentos PDF">
+    </p>
+    <ul>
+     <li><b>Configuração da política de assinatura:</b> Permite declarar a política de assinatura seguida nas assinaturas PAdES.
+     <p>Os valores acessíveis pelo painel de configuração são:</p>
+        <ul>
+         <li>Nenhuma política: As assinaturas PDF geradas não declararão política de assinatura.</li>
+         <li>Política de assinatura da AGE 1.9: Declara a política de assinatura da AGE v1.9.</li>
+         <li>Política personalizada: Permite configurar manualmente cada uma das propriedades da política.</li>
+            <ul>
+             <li>Identificador da política.</li>
+             <li>Hash do identificador da política.</li>
+             <li>Algoritmo de hash do identificador da política.</li>
+             <li>Qualificador da política</li>
+            </ul>
+        </ul>
+        </li>
+        <li><b>Opções de assinatura:</b> Opções gerais de assinatura PAdES. Formato básico de assinatura.
+         <ul>
+            <li>Formato básico de assinatura: Permite configurar o formato básico das assinaturas PAdES:
+             <ul>
+                <li>PAdES Básico: É o formato de assinatura PAdES gerado pelo Adobe Acrobat e o utilizado por padrão pelo Autofirma.</li>
+                <li>PAdES-BES: É o formato que mais se ajusta ao padrão PAdES, mas o Adobe Reader/Acrobat não valida corretamente as multissinaturas geradas a partir dele.</li>
+             </ul>
+            </li>
+            <li>Realizar por padrão assinaturas visíveis PDF: Ao habilitar esta opção e assinar um documento em formato PAdES, será apresentada ao usuário uma janela para seleção da área do PDF onde será adicionada a assinatura visível. Consulte a seção <a href="VentanaPdfVisible.html">Assinaturas visíveis PDF</a> para mais detalhes.</li>
+            <li>Ofuscar identificadores de usuário dos certificados das assinaturas visíveis: Ao habilitar esta opção, os identificadores de usuário inseridos nos textos visíveis PDF ao obter os dados de um certificado serão ofuscados. A ofuscação não será realizada quando o certificado de assinatura for um certificado de pseudônimo.</li>
+            <li>Aplicar marca visível a documentos PDF: Ao habilitar esta opção e assinar um documento em formato PAdES, será apresentada ao usuário uma janela para seleção da área e páginas do PDF onde será adicionada uma marca visível. Consulte a seção <a href="VentanaPdfVisible.html">Marcas visíveis PDF</a> para mais detalhes.</li>
+            <li>Gerar PDF certificado: Ao habilitar esta opção, será possível ao usuário gerar um PDF certificado, com o nível de certificação escolhido na lista a seguir.</li>
+             <ul>
+                <li>Sem certificar: Não realiza assinatura certificada do documento, gera assinatura PAdES.</li>
+                <li>Certificado de autor: Não são permitidas alterações.</li>
+                <li>Certificado de autor para formulários: Apenas são permitidas ações de preenchimento de formulários, assinatura e adição de páginas.</li>
+                <li>Certificado comum: Apenas são permitidas ações de comentários, preenchimento de formulários, assinatura e adição de páginas.</li>
+             </ul>
+         </ul>
+        </li>
+        <li><b>Metadados das assinaturas PAdES:</b>
+         <ul>
+            <li>Razão pela qual o documento é assinado: Descrição breve do motivo da assinatura.</li>
+            <li>Cidade onde a assinatura é realizada: Cidade onde o signatário está localizado no momento da assinatura.</li>
+            <li>Contato do signatário: Endereço de e-mail.</li>
+         </ul>
+        </li>
+     </ul>
+    <h3>Menu "Assinaturas CAdES (binárias)"</h3>
+    <p align="center">
+        <img src="../gfx/menufirmascades_mini.png" alt="Tela para configuração das assinaturas de documentos binários">
+    </p>
+    <ul>
+     <li><b>Configuração da política de assinatura:</b> Permite declarar a política de assinatura seguida nas assinaturas CAdES:
+        <p>Os valores acessíveis pelo painel de configuração são:</p>
+        <ul>
+         <li>Nenhuma política: As assinaturas geradas não declararão política de assinatura.</li>
+         <li>Política de assinatura da AGE 1.9: Declara a política de assinatura da AGE v1.9</li>
+         <li>Política personalizada: Permite configurar manualmente cada uma das propriedades da política.</li>
+            <ul>
+             <li>Identificador da política.</li>
+             <li>Hash do identificador da política.</li>
+             <li>Algoritmo de hash do identificador da política.</li>
+             <li>Qualificador da política</li>
+            </ul>
+        </ul>
+        </li>
+        <li><b>Opções de assinatura:</b>
+         <ul>
+            <li>Incluir uma cópia dos dados assinados na própria assinatura: Configura se a assinatura eletrônica deve armazenar internamente os dados assinados.</li>
+         </ul>
+        </li>
+        <li><b>Operação em multissinaturas:</b> Permite configurar a operação a ser realizada quando o arquivo de entrada for uma assinatura CAdES.
+         <ul>
+            <li>Coassinatura: Coassina a assinatura de entrada.</li>
+            <li>Contrafirma (apenas dos nós folha): Contrafirma os nós folha da assinatura de entrada.</li>
+            <li>Contrafirma (de toda a árvore): Contrafirma todos os nós de assinatura da assinatura de entrada.</li>
+         </ul>
+        </li>
+     </ul>
+     <h3>Menu "Assinaturas XAdES (XML)"</h3>
+    <p align="center">
+        <img src="../gfx/menufirmasxades_mini.png" alt="Tela para configuração das assinaturas de documentos XML">
+    </p>
+    <ul>
+     <li><b>Configuração da política de assinatura:</b> Permite declarar a política de assinatura seguida nas assinaturas XAdES:
+        <p>Os valores acessíveis pelo painel de configuração são:</p>
+        <ul>
+         <li>Nenhuma política: As assinaturas XML geradas não declararão política de assinatura.</li>
+         <li>Política de assinatura da AGE 1.9: Declara a política de assinatura da AGE v1.9</li>
+         <li>Política personalizada: Permite configurar manualmente cada uma das propriedades da política.</li>
+            <ul>
+             <li>Identificador da política.</li>
+             <li>Hash do identificador da política.</li>
+             <li>Algoritmo de hash do identificador da política.</li>
+             <li>Qualificador da política</li>
+            </ul>
+        </ul>
+     </li>
+     <li><b>Opções de assinatura:</b>
+        <ul>
+         <li><b>Formato das assinaturas:</b>
+            <ul>
+             <li>XAdES Enveloping: Configura o modo enveloping (a assinatura envolve os dados assinados).</li>
+             <li>XAdES Detached: Configura o modo detached (assinatura e dados em uma superestrutura XML).</li>
+             <li>XAdES Enveloped: Configura o modo enveloped (a assinatura é inserida dentro dos dados XML).</li>
+            </ul>
+         </li>
+        </ul>
+        <p><b><u>AVISO:</u></b> A política de assinatura da AGE só permite a realização de assinaturas nos formatos Enveloped e Internally Detached (aqui referida como Detached). Assim, só será possível configurar esses formatos de assinatura ao declarar a política de assinatura da AGE.</p>
+     </li>
+     <li><b>Metadados das assinaturas XAdES:</b>
+        <ul>
+         <li>Cidade onde a assinatura é realizada: Cidade onde o signatário está localizado no momento da assinatura.</li>
+         <li>Província onde a assinatura é realizada: Província onde o signatário está localizado no momento da assinatura.</li>
+         <li>CEP onde a assinatura é realizada: CEP onde o signatário está localizado no momento da assinatura.</li>
+         <li>País onde a assinatura é realizada: País onde o signatário está localizado no momento da assinatura.</li>
+         <li>Cargo do signatário: Cargo de quem realiza a assinatura.</li>
+        </ul>
+     </li>
+    </ul>
+     <h3>Menu "Nota Fiscal Eletrônica"</h3>
+     <p align="center">
+        <img src="../gfx/menufirmasfacturae_mini.png" alt="Tela para configuração das assinaturas de notas fiscais eletrônicas">
+     </p>
+     <ul>
+        <li><b>Configuração da política de assinatura:</b> Permite declarar a versão da política de assinatura de Nota Fiscal Eletrônica a ser utilizada.</li>
+        <li><b>Opções de assinatura:</b>
+         <ul>
+            <li>Papel do signatário da nota fiscal eletrônica: Permite configurar o papel desempenhado pelo signatário no ciclo de vida da nota fiscal.</li>
+         </ul>
+        </li>
+        <li><b>Metadados das notas fiscais eletrônicas:</b>
+         <ul>
+            <li>Cidade onde a assinatura é realizada: Cidade onde o signatário está localizado no momento da assinatura.</li>
+            <li>Província onde a assinatura é realizada: Província onde o signatário está localizado no momento da assinatura.</li>
+            <li>CEP onde a assinatura é realizada: CEP onde o signatário está localizado no momento da assinatura.</li>
+            <li>País onde a assinatura é realizada: País onde o signatário está localizado no momento da assinatura.</li>
+         </ul>
+        </li>
+     </ul>
+            <h3>Menu "Repositórios de chaves"</h3>
+     <p align="center">
+        <img src="../gfx/menualmacenesclaves_mini.png" alt="Tela para configuração das assinaturas de notas fiscais eletrônicas">
+     </p>
+     <ul>
+        <li><b>Repositório padrão:</b>
+         <ul>
+            <li>Permite selecionar o repositório de chaves que será carregado por padrão na interface desktop.</li>
+            <li><b>Ver conteúdo:</b> Permite ver os certificados contidos no repositório selecionado.</li>
+            <li><b>Usar também nas chamadas do Autofirma a partir do navegador:</b> Indica se deseja que o repositório configurado seja o carregado por padrão também quando o Autofirma for chamado a partir do navegador.</li>
+         </ul>
+        </li>
+        <li><b>Filtros de certificados:</b>
+         <ul>
+            <li><b>Não mostrar a tela inicial do DNIe e trabalhar sempre com o repositório padrão:</b> Omite a tela inicial ao detectar um DNIe e será utilizado o repositório padrão configurado.</li>
+            <li><b>Permitir o uso de certificados expirados:</b> Ao habilitar esta opção, os certificados expirados aparecerão no diálogo de seleção de certificados de assinatura, permitindo assinar com eles.</li>
+            <li><b>Usar apenas certificados específicos para assinatura em assinaturas eletrônicas (atributo de não repúdio):</b> Se esta opção estiver marcada, apenas serão exibidos os certificados que declararem ser especificamente de assinatura.</li>
+            <li><b>Usar exclusivamente certificados de pseudônimo quando disponíveis:</b> Restringe para que apenas possam ser usados certificados de pseudônimo quando disponíveis.</li>
+            <li><b>Omitir certificado de autenticação do DNIe:</b> Oculta o certificado de autenticação incluído nos repositórios de chaves para DNIe.</li>
+         </ul>
+        </li>
+        <li><b>Cartões inteligentes:</b>
+         <ul>
+            <li>Permite cadastrar cartões inteligentes a partir de seu driver PKCS#11 para poder usá-los diretamente como um repositório de chaves acessível pelo diálogo de seleção de certificados. Os cartões inteligentes adicionados aqui poderão ser configurados como repositórios padrão no menu suspenso do primeiro item.</li>
+            <li><b>Conectar:</b> Realiza um teste de conexão com o repositório de chaves do cartão inteligente selecionado.</li>
+            <li><b>Adicionar cartão:</b> Adiciona um novo cartão inteligente. Será aberto um diálogo para inserir um nome para o cartão inteligente e o caminho onde está seu driver PKCS#11.</li>
+            <li><b>Modificar:</b> Permite modificar o nome e o caminho do driver do cartão inteligente selecionado.</li>
+            <li><b>Remover:</b> Remove o cartão inteligente selecionado no menu suspenso.</li>
+         </ul>
+        </li>
+     </ul>
+ </body>
+</html>

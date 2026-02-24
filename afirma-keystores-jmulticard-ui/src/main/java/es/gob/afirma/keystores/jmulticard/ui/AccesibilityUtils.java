@@ -227,7 +227,7 @@ final class AccesibilityUtils {
         		component instanceof JPasswordField ||
         		component instanceof JTextField
     		) {
-                component.setBackground(Color.WHITE);
+                component.setBackground(Color.BLACK);
             }
             else if (component instanceof JCheckBox) {
                 component.setForeground(Color.WHITE);

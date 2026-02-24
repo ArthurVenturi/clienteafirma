@@ -155,14 +155,14 @@ final class CertificateSelectionPanel extends JPanel implements ListSelectionLis
         		mainMessage.setForeground(Color.decode("0x0033BC")); //$NON-NLS-1$
         		windowColor = UIManager.getColor("window") != null ? //$NON-NLS-1$
     	    			 new Color(UIManager.getColor("window").getRGB()) : //$NON-NLS-1$
-    	    			Color.WHITE;
+    	    			Color.BLACK;
         	}
         	catch (final Throwable e) {
-        		windowColor = Color.WHITE;
+        		windowColor = Color.BLACK;
     		}
             setBackground(windowColor);
         } else {
-    		mainMessage.setForeground(Color.WHITE);
+    		mainMessage.setForeground(Color.BLACK);
         }
 
 		setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));

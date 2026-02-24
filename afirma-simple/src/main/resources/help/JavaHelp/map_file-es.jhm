@@ -2,14 +2,14 @@
 <map version="1.0">
 
 <!-- Pages -->
-	<mapID target="Autofirma" url="../Spanish.lproj/Autofirma.html" />
-	<mapID target="PantallaEspera" url="../Spanish.lproj/pgs/PantallaEspera.html" />
-	<mapID target="PantallaFirma" url="../Spanish.lproj/pgs/PantallaFirma.html" />
-	<mapID target="PantallaDetalle" url="../Spanish.lproj/pgs/PantallaDetalle.html" />
-	<mapID target="MenuPreferencias" url="../Spanish.lproj/pgs/MenuPreferencias.html" />
-	<mapID target="MenuPlugins" url="../Spanish.lproj/pgs/MenuPlugins.html" />
-	<mapID target="VentanaConfigurarProxy" url="../Spanish.lproj/pgs/VentanaConfigurarProxy.html" />
-	<mapID target="VentanaPdfVisible" url="../Spanish.lproj/pgs/VentanaPdfVisible.html" />
-	<mapID target="LineaComandos" url="../Spanish.lproj/pgs/LineaComandos.html" />
-	<mapID target="Licencia" url="../Spanish.lproj/pgs/Licencia.html" />
+	<mapID target="Autofirma" url="../Portuguese_BR.lproj/Autofirma.html" />
+	<mapID target="PantallaEspera" url="../Portuguese_BR.lproj/pgs/PantallaEspera.html" />
+	<mapID target="PantallaFirma" url="../Portuguese_BR.lproj/pgs/PantallaFirma.html" />
+	<mapID target="PantallaDetalle" url="../Portuguese_BR.lproj/pgs/PantallaDetalle.html" />
+	<mapID target="MenuPreferencias" url="../Portuguese_BR.lproj/pgs/MenuPreferencias.html" />
+	<mapID target="MenuPlugins" url="../Portuguese_BR.lproj/pgs/MenuPlugins.html" />
+	<mapID target="VentanaConfigurarProxy" url="../Portuguese_BR.lproj/pgs/VentanaConfigurarProxy.html" />
+	<mapID target="VentanaPdfVisible" url="../Portuguese_BR.lproj/pgs/VentanaPdfVisible.html" />
+	<mapID target="LineaComandos" url="../Portuguese_BR.lproj/pgs/LineaComandos.html" />
+	<mapID target="Licencia" url="../Portuguese_BR.lproj/pgs/Licencia.html" />
 </map>

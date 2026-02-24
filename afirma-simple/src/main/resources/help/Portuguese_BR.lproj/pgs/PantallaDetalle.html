@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+ <head>
+  <title>Autofirma</title>
+  <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+  <meta name="KEYWORDS" content="certificado, OCSP, contrafirma, cofirma, mancomunada">
+  <meta name="description" content="Mostrar os detalhes de uma assinatura realizada.">
+ </head>
+ <body>
+  <h3>Tela de detalhes da assinatura ou assinaturas realizadas</h3>
+  <p>
+   Após finalizar uma operação de assinatura, é exibida uma tela com informações sobre o resultado da operação.
+  </p>
+  <p align="center">
+   <img src="../gfx/pantalladetalle_mini.png" alt="Tela com informações da assinatura realizada ao assinar um único documento">
+   <img src="../gfx/pantalladetalle2_mini.png" alt="Tela com a lista de assinaturas realizadas ao assinar múltiplos documentos">
+  </p>
+  <p>
+   Se desejar obter mais informações sobre a assinatura, pode clicar no link <u>Detalhes da assinatura</u> e será exibido um diálogo com informações sobre ela:
+  </p>
+  <p align="center">
+   <img src="../gfx/pantalladetallesfirma.png" alt="Tela com informações detalhadas sobre a assinatura">
+  </p>
+  <p>
+   Esta tela se divide em três seções:
+  </p>
+  <p>
+   <b>Informações sobre o arquivo assinado ou diretório de saída</b><br/>
+   É exibido o caminho completo do arquivo assinado (pode copiar este caminho clicando com o botão direito do mouse) ou do diretório de saída. Se foi realizada a assinatura PAdES de um documento PDF, será exibido um botão para abrir o documento assinado com o aplicativo padrão do sistema.
+  </p>
+  <p>
+   <b>Informações sobre o certificado utilizado para realizar as assinaturas</b><br/>
+   É possível ver o certificado (pelo aplicativo padrão do sistema operacional) clicando nos hyperlinks.
+  </p>
+  <p>
+   <b>Informações detalhadas sobre a assinatura ou conjunto de assinaturas realizadas</b><br/>
+   No caso de assinar um documento, são exibidos pelo menos os seguintes pontos em uma estrutura de árvore:
+  </p>
+  <ul>
+   <li>Formato da assinatura: CAdES, PAdES, XAdES, Factura-e, OOXML ou ODF.</li>
+   <li>Dados assinados: Indica se os dados estão embutidos na própria assinatura e permite acessá-los caso estejam.</li>
+   <li>
+    Árvore de assinaturas: Estrutura hierárquica das assinaturas encontradas no documento. É possível ver o certificado usado para cada uma delas clicando no respectivo link.
+   </li>
+  </ul>
+  <p>
+   Para navegar entre os elementos da árvore, podem ser usadas as setas do teclado.
+  </p>
+  <p>
+   Caso tenha assinado múltiplos arquivos, será exibida uma lista com os arquivos gerados, seu tamanho e resultado. No caso das assinaturas que não puderam ser geradas, será exibido o caminho do arquivo de entrada. É possível dar duplo clique em uma das assinaturas da lista para acessar suas informações detalhadas.
+  </p>
+ </body>
+</html>

@@ -19,7 +19,7 @@ public final class AOCertificatesNotFoundException extends AOException {
 
     /** Crea la excepci&oacute;n con el mensaje por defecto. */
     public AOCertificatesNotFoundException() {
-        super("No hay certificados en el almacen"); //$NON-NLS-1$
+        super("Não há certificados no armazém"); //$NON-NLS-1$
     }
 
     /** Crea la excepci&oacute;n con un mensaje determinado.

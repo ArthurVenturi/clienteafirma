@@ -70,7 +70,11 @@ final class SignPanelMultiFilePanel extends JPanel implements Scrollable {
 
     void createUI(final List<SignOperationConfig> operations) {
 
-        setLayout(new GridBagLayout());
+		setLayout(new GridBagLayout());
+		// Set background color according to LookAndFeelManager preferences
+		if (!LookAndFeelManager.WINDOWS_HIGH_CONTRAST) {
+			setBackground(LookAndFeelManager.DEFAULT_COLOR);
+		}
 
         final FileOperationTitleRenderer titlePanel = new FileOperationTitleRenderer();
         titlePanel.setFileNameColumnTitle(SimpleAfirmaMessages.getString("SignDataPanel.43")); //$NON-NLS-1$
@@ -271,7 +275,7 @@ final class SignPanelMultiFilePanel extends JPanel implements Scrollable {
 
             // Configuramos los colores
             if (!LookAndFeelManager.WINDOWS_HIGH_CONTRAST) {
-            	setBackground(Color.WHITE);
+            	setBackground(LookAndFeelManager.DEFAULT_COLOR);
             }
 
 			setLayout(new GridBagLayout());

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+ <head>
+    <title>Configuração de <i>proxy</i></title>
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+    <meta name="KEYWORDS" content="preferências, configurar, proxy, rede">
+    <meta name="description" content="Menu preferências.">
+ </head>
+ <body>
+    <h2>Configuração de <i>proxy</i></h2>
+    <p>
+        O Autofirma precisa acessar a Internet por diferentes motivos e, se necessário, deve-se configurar um <i>proxy</i> de rede para permitir isso. Os propósitos para os quais o Autofirma pode requerer acesso à rede são:
+    </p>
+    <ul>
+         <li>Comunicar-se com páginas web onde são realizados procedimentos de assinatura.</li>
+         <li>Buscar atualizações (apenas se a opção estiver habilitada).</li>
+         <li>Enviar estatísticas (apenas se a opção estiver habilitada).</li>
+    </ul>
+    <p>
+        Todas as conexões de rede realizadas pelo Autofirma aplicarão a configuração de <i>proxy</i> aqui estabelecida.
+    </p>
+    <p align="center">
+        <img src="../gfx/menugproxy_mini.png" alt="Tela para configuração do proxy de rede">
+    </p>
+    As opções de configuração de <i>proxy</i> são:
+    <ul>
+         <li><b>Sem proxy:</b> As conexões de rede serão feitas diretamente.</li>
+         <li><b>Configuração de proxy do sistema:</b> O aplicativo identificará a configuração que deve aplicar para cada URL conforme a configuração estabelecida no sistema operacional e/ou navegador. Esta configuração pode não ser exatamente igual à estabelecida no Windows.</li>
+         <li><b>Configuração manual de proxy:</b> Permite definir a configuração específica de proxy a ser utilizada. As opções configuráveis são:</li>
+             <ul>
+                 <li><b>Host:</b> Nome de domínio ou IP do proxy.</li>
+                 <li><b>Porta:</b> Número da porta de acesso ao proxy.</li>
+                 <li><b>Usuário:</b> Nome de usuário a ser utilizado quando o proxy exigir autenticação. Opcional.</li>
+                 <li><b>Senha:</b> Senha do usuário a ser utilizada quando o proxy exigir autenticação. Opcional.</li>
+                 <li><b>Não usar proxy para os seguintes endereços IP e domínios:</b> Lista de endereços IP e nomes de domínio que devem ser acessados diretamente (sem passar pelo proxy configurado manualmente). Comumente, são configurados aqui os endereços da intranet quando operações de assinatura são realizadas a partir de aplicações web situadas tanto dentro quanto fora da sua intranet.<br>Os endereços devem ser separados por vírgulas (,) e podem ser usados asteriscos (*) no início ou fim de cada um como coringa para identificar subdomínios ou sub-redes completas. Opcional.</li>
+             </ul>
+             <p>Adicionalmente, são fornecidas as seguintes opções:</p>
+             <ul>
+                 <li><b>Autodetectar:</b> Extrai da configuração do sistema o host e a porta a serem utilizados para um endereço genérico.</li>
+                 <li><b>Verificar conexão:</b> Verifica a configuração manual de proxy para o acesso a um endereço genérico.</li>
+             </ul>
+    </ul>
+    <p>A configuração estabelecida será aplicada ao clicar no botão <b>OK</b>. Se clicar no botão <b>Cancelar</b>, a janela será fechada sem aplicar a configuração.</p>
+ </body>
+</html>

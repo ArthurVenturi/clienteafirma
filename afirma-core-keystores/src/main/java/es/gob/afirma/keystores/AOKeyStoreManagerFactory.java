@@ -35,29 +35,29 @@ public final class AOKeyStoreManagerFactory {
         // No permitimos la instanciacion
     }
 
-    /** Variable de entorno de ejecuci&acute;n que si se establece a <code>true</code> indica que
-     * nunca debe reutilizarse un almac&eacute;n de claves ya creado. Si no se establece o se
-     * establece a <code>false</code>, se reutilizan las instancias existentes siempre que sea
-     * posible, por eficiencia. */
+	/** Variável de ambiente de execução que, se definida como <code>true</code>, indica que
+	 * nunca deve reutilizar um repositório de chaves já criado. Se não for definida ou for
+	 * definida como <code>false</code>, as instâncias existentes serão reutilizadas sempre que possível,
+	 * por eficiência. */
     public static final String FORCE_STORE_RESET = "es.gob.afirma.keystores.ForceReset"; //$NON-NLS-1$
 
-    /** Obtiene el <code>KeyStoreManager</code> del tipo indicado.
-     * @param store Almac&eacute;n de claves
-     * @param lib Biblioteca del KeyStore (solo para KeyStoreManager de tipo PKCS#11) o fichero de almac&eacute;n de claves (para
-     *            PKCS#12, Java KeyStore, JCE KeyStore, X.509, llavero de Mac OS X [opcional] y PKCS#7)
-     * @param description Descripci&oacute;n del KeyStoreManager que se desea obtener,
-     *                    necesario para obtener el n&uacute;mero de z&oacute;calo de los modulos PKCS#11 obtenidos del Secmod de Mozilla / Firefox.
-     *                    Debe seguir el formato definido en el m&eacute;todo <code>toString()</code> de la clase <code>sun.security.pkcs11.Secmod.Module</code>
-     * @param pssCallback <i>Callback</i> que solicita la contrase&ntilde;a del repositorio que deseamos recuperar.
-     * @param parentComponent Componente padre sobre el que mostrar los di&aacute;logos (normalmente un <code>java.awt.Comonent</code>)
-     *                        modales de ser necesario.
-     * @return <code>KeyStoreManager</code> del tipo indicado
-     * @throws AOCancelledOperationException Cuando el usuario cancela el proceso (por ejemplo, al introducir la contrase&ntilde;a)
-     * @throws AOKeystoreAlternativeException Cuando ocurre cualquier otro problema durante el proceso
-     * @throws IOException Cuando la contrase&ntilde;a del almac&eacute;n es incorrecta.
-     * @throws es.gob.afirma.core.InvalidOSException Cuando se pide un almac&eacute;n &uacute;nicamente disponible para
-     *                                               un sistema operativo distinto del actual
-     * @throws es.gob.afirma.core.MissingLibraryException Cuando no se localice una biblioteca necesaria para el
+	/** Obtém o <code>KeyStoreManager</code> do tipo indicado.
+	 * @param store Repositório de chaves
+	 * @param lib Biblioteca do KeyStore (apenas para KeyStoreManager do tipo PKCS#11) ou arquivo de repositório de chaves (para
+	 *            PKCS#12, Java KeyStore, JCE KeyStore, X.509, chaveiro do Mac OS X [opcional] e PKCS#7)
+	 * @param description Descrição do KeyStoreManager que se deseja obter,
+	 *                    necessário para obter o número do soquete dos módulos PKCS#11 obtidos do Secmod do Mozilla / Firefox.
+	 *                    Deve seguir o formato definido no método <code>toString()</code> da classe <code>sun.security.pkcs11.Secmod.Module</code>
+	 * @param pssCallback <i>Callback</i> que solicita a senha do repositório que desejamos recuperar.
+	 * @param parentComponent Componente pai sobre o qual mostrar os diálogos (normalmente um <code>java.awt.Comonent</code>)
+	 *                        modais se necessário.
+	 * @return <code>KeyStoreManager</code> do tipo indicado
+	 * @throws AOCancelledOperationException Quando o usuário cancela o processo (por exemplo, ao digitar a senha)
+	 * @throws AOKeystoreAlternativeException Quando ocorre qualquer outro problema durante o processo
+	 * @throws IOException Quando a senha do repositório está incorreta.
+	 * @throws es.gob.afirma.core.InvalidOSException Quando se pede um repositório disponível apenas para
+	 *                                               um sistema operacional diferente do atual
+	 * @throws es.gob.afirma.core.MissingLibraryException Quando não for localizada uma biblioteca necessária para o
      *                                                    uso del almac&eacute;n. */
     public static AggregatedKeyStoreManager getAOKeyStoreManager(final AOKeyStore store,
                                                                  final String lib,
@@ -72,13 +72,13 @@ public final class AOKeyStoreManagerFactory {
     	}
     	catch(final Exception e) {
     		forceReset = false;
-    		LOGGER.warning(
-				"No se ha podido leer la variable '" + FORCE_STORE_RESET + "', se usara 'false' como valor por defecto: " + e //$NON-NLS-1$ //$NON-NLS-2$
+			LOGGER.warning(
+				"Não foi possível ler a variável '" + FORCE_STORE_RESET + "', será usado 'false' como valor padrão: " + e //$NON-NLS-1$ //$NON-NLS-2$
 			);
     	}
-    	if (forceReset) {
-    		LOGGER.info(
-				"No se mantendran los almacenes de claves precargados (es.gob.afirma.keystores.ForceReset=true)" //$NON-NLS-1$
+		if (forceReset) {
+			LOGGER.info(
+				"Os repositórios de chaves pré-carregados não serão mantidos (es.gob.afirma.keystores.ForceReset=true)" //$NON-NLS-1$
 			);
     	}
 
@@ -185,20 +185,20 @@ public final class AOKeyStoreManagerFactory {
             storeFilename = lib;
         }
         if (storeFilename == null) {
-            storeFilename = AOUIFactory.getLoadFiles(
-        		KeyStoreMessages.getString("AOKeyStoreManagerFactory.4") + " " + ksm.getType().getName(), //$NON-NLS-1$ //$NON-NLS-2$
-        		null,
-        		null,
-        		exts,
-        		desc,
-        		false,
-        		false,
-        		null,
-        		parentComponent
-    		)[0].getAbsolutePath();
-            if (storeFilename == null) {
-                throw new AOCancelledOperationException("No se ha seleccionado el almacen de certificados"); //$NON-NLS-1$
-            }
+			storeFilename = AOUIFactory.getLoadFiles(
+				KeyStoreMessages.getString("AOKeyStoreManagerFactory.4") + " " + ksm.getType().getName(), //$NON-NLS-1$ //$NON-NLS-2$
+				null,
+				null,
+				exts,
+				desc,
+				false,
+				false,
+				null,
+				parentComponent
+			)[0].getAbsolutePath();
+			if (storeFilename == null) {
+				throw new AOCancelledOperationException("Nenhum repositório de certificados foi selecionado"); //$NON-NLS-1$
+			}
         }
 
         try (
@@ -207,11 +207,11 @@ public final class AOKeyStoreManagerFactory {
             ksm.init(null, is, pssCallback, null, forceReset);
         }
         catch (final AOException e) {
-            throw new AOKeystoreAlternativeException(
-        	   AOKeyStore.JAVA,
-               "No se ha podido abrir el almacen de tipo " + ksm.getType().getName() + " para el fichero " + lib, //$NON-NLS-1$ //$NON-NLS-2$
-               e
-            );
+				throw new AOKeystoreAlternativeException(
+					AOKeyStore.JAVA,
+					"Não foi possível abrir o repositório do tipo " + ksm.getType().getName() + " para o arquivo " + lib, //$NON-NLS-1$ //$NON-NLS-2$
+					e
+				);
         }
         return ksm;
     }
@@ -268,7 +268,7 @@ public final class AOKeyStoreManagerFactory {
 		}
 		catch (final AOKeyStoreManagerException e) {
 			throw new AOKeystoreAlternativeException(getAlternateKeyStoreType(AOKeyStore.PKCS12),
-				"Error al inicializar el modulo G&D SmartCafe 100% Java: " + e, e //$NON-NLS-1$
+				"Erro ao inicializar o módulo G&D SmartCafe 100% Java: " + e, e //$NON-NLS-1$
 			);
 		}
 		ksm.setPreferred(true);
@@ -284,11 +284,11 @@ public final class AOKeyStoreManagerFactory {
 			ksm.init(AOKeyStore.CERES, null, pssCallback, new Object[] { parentComponent }, forceReset);
 		}
 		catch (final AOKeyStoreManagerException e) {
-			throw new AOKeystoreAlternativeException(
-					getAlternateKeyStoreType(AOKeyStore.PKCS12),
-					"Error al inicializar el modulo CERES 100% Java: " + e, //$NON-NLS-1$
-					e
-					);
+			    throw new AOKeystoreAlternativeException(
+				    getAlternateKeyStoreType(AOKeyStore.PKCS12),
+				    "Erro ao inicializar o módulo CERES 100% Java: " + e, //$NON-NLS-1$
+				    e
+				    );
 		}
 		ksm.setPreferred(true);
 		return ksm;
@@ -303,11 +303,11 @@ public final class AOKeyStoreManagerFactory {
 			ksm.init(AOKeyStore.CERES_430, null, pssCallback, new Object[] { parentComponent }, forceReset);
 		}
 		catch (final AOKeyStoreManagerException e) {
-			throw new AOKeystoreAlternativeException(
-					getAlternateKeyStoreType(AOKeyStore.PKCS12),
-					"Error al inicializar el modulo CERES 430 100% Java: " + e, //$NON-NLS-1$
-					e
-					);
+			    throw new AOKeystoreAlternativeException(
+				    getAlternateKeyStoreType(AOKeyStore.PKCS12),
+				    "Erro ao inicializar o módulo CERES 430 100% Java: " + e, //$NON-NLS-1$
+				    e
+				    );
 		}
 		ksm.setPreferred(true);
 		return ksm;
@@ -323,11 +323,11 @@ public final class AOKeyStoreManagerFactory {
     		ksm.init(AOKeyStore.DNIEJAVA, null, pssCallback, new Object[] { parentComponent }, forceReset);
     	}
     	catch (final AOKeyStoreManagerException e) {
-    	   throw new AOKeystoreAlternativeException(
-                getAlternateKeyStoreType(AOKeyStore.PKCS12),
-                "Error al inicializar el modulo DNIe 100% Java: " + e, //$NON-NLS-1$
-                e
-           );
+		 throw new AOKeystoreAlternativeException(
+			 getAlternateKeyStoreType(AOKeyStore.PKCS12),
+			 "Erro ao inicializar o módulo DNIe 100% Java: " + e, //$NON-NLS-1$
+			 e
+		 );
 		}
     	ksm.setPreferred(true);
     	return ksm;
@@ -359,20 +359,20 @@ public final class AOKeyStoreManagerFactory {
                 };
                 desc = KeyStoreMessages.getString("AOKeyStoreManagerFactory.3"); //$NON-NLS-1$
             }
-            storeFilename = AOUIFactory.getLoadFiles(
-        		KeyStoreMessages.getString("AOKeyStoreManagerFactory.4") + " " + store.getName(), //$NON-NLS-1$ //$NON-NLS-2$
-        		null,
-        		null,
-        		exts,
-        		desc,
-        		false,
-        		false,
-        		null,
-        		parentComponent
-    		)[0].getAbsolutePath();
-            if (storeFilename == null) {
-                throw new AOCancelledOperationException("No se ha seleccionado el almacen de certificados"); //$NON-NLS-1$
-            }
+			storeFilename = AOUIFactory.getLoadFiles(
+				KeyStoreMessages.getString("AOKeyStoreManagerFactory.4") + " " + store.getName(), //$NON-NLS-1$ //$NON-NLS-2$
+				null,
+				null,
+				exts,
+				desc,
+				false,
+				false,
+				null,
+				parentComponent
+			)[0].getAbsolutePath();
+			if (storeFilename == null) {
+				throw new AOCancelledOperationException("Nenhum repositório de certificados foi selecionado"); //$NON-NLS-1$
+			}
         }
 
         try (
@@ -381,11 +381,11 @@ public final class AOKeyStoreManagerFactory {
             ksm.init(store, is, pssCallback, null, forceReset);
         }
         catch (final AOException e) {
-            throw new AOKeystoreAlternativeException(
-               getAlternateKeyStoreType(store),
-               "No se ha podido abrir el almacen de tipo " + store.getName(), //$NON-NLS-1$
-               e
-            );
+				throw new AOKeystoreAlternativeException(
+					getAlternateKeyStoreType(store),
+					"Não foi possível abrir o repositório do tipo " + store.getName(), //$NON-NLS-1$
+					e
+				);
         }
         return ksm;
     }
@@ -401,9 +401,9 @@ public final class AOKeyStoreManagerFactory {
         if (lib != null && !lib.isEmpty()) {
             p11Lib = lib;
         }
-        if (p11Lib != null && !new File(p11Lib).isFile()) {
-        	throw new IOException("La biblioteca '" + p11Lib + "' no existe"); //$NON-NLS-1$ //$NON-NLS-2$
-        }
+		if (p11Lib != null && !new File(p11Lib).isFile()) {
+			throw new IOException("A biblioteca '" + p11Lib + "' não existe"); //$NON-NLS-1$ //$NON-NLS-2$
+		}
 
         if (p11Lib == null) {
             final String[] exts;
@@ -432,9 +432,9 @@ public final class AOKeyStoreManagerFactory {
 	             parentComponent
             )[0].getAbsolutePath();
         }
-        if (p11Lib == null) {
-            throw new AOCancelledOperationException("No se ha seleccionado el controlador PKCS#11"); //$NON-NLS-1$
-        }
+		if (p11Lib == null) {
+			throw new AOCancelledOperationException("Nenhum driver PKCS#11 foi selecionado"); //$NON-NLS-1$
+		}
         try {
             ksm.init(
         		AOKeyStore.PKCS11,
@@ -446,12 +446,12 @@ public final class AOKeyStoreManagerFactory {
         		forceReset
     		);
         }
-        catch (final AOException e) {
-            throw new AOKeystoreAlternativeException(
-                 getAlternateKeyStoreType(AOKeyStore.PKCS11),
-                 "Error al inicializar el modulo PKCS#11: " + e, //$NON-NLS-1$
-                 e
-            );
+		   catch (final AOException e) {
+			  throw new AOKeystoreAlternativeException(
+				  getAlternateKeyStoreType(AOKeyStore.PKCS11),
+				  "Erro ao inicializar o módulo PKCS#11: " + e, //$NON-NLS-1$
+				  e
+			  );
         }
         return ksm;
     }
@@ -463,12 +463,12 @@ public final class AOKeyStoreManagerFactory {
         try {
             ksm.init(store, null, NullPasswordCallback.getInstance(), null, forceReset);
         }
-        catch (final AOException e) {
-            throw new AOKeystoreAlternativeException(
-                 getAlternateKeyStoreType(store),
-                 "Error al inicializar el almacen " + store.getName(), //$NON-NLS-1$
-                 e
-            );
+		   catch (final AOException e) {
+			  throw new AOKeystoreAlternativeException(
+				  getAlternateKeyStoreType(store),
+				  "Erro ao inicializar o repositório " + store.getName(), //$NON-NLS-1$
+				  e
+			  );
         }
         return ksm;
     }
@@ -481,10 +481,10 @@ public final class AOKeyStoreManagerFactory {
 		}
 		catch (final AOKeyStoreManagerException e) {
 			throw new AOKeystoreAlternativeException(
-                 getAlternateKeyStoreType(AOKeyStore.WINDOWS),
-                 "Error al obtener almacen WINDOWS: " + e, //$NON-NLS-1$
-                 e
-             );
+				 getAlternateKeyStoreType(AOKeyStore.WINDOWS),
+				 "Erro ao obter repositório WINDOWS: " + e, //$NON-NLS-1$
+				 e
+			 );
 		}
 
 		return ksmCapi;
@@ -499,10 +499,10 @@ public final class AOKeyStoreManagerFactory {
     	try {
     		ksmUni = (AggregatedKeyStoreManager) Class.forName(KsmClassName).getConstructor().newInstance();
     	}
-    	catch(final Exception e) {
-    		throw new AOKeystoreAlternativeException(
+		catch(final Exception e) {
+			throw new AOKeystoreAlternativeException(
 				getAlternateKeyStoreType(AOKeyStore.MOZ_UNI),
-				"Error al obtener dinamicamente el almacen NSS: " + e, //$NON-NLS-1$
+				"Erro ao obter dinamicamente o repositório NSS: " + e, //$NON-NLS-1$
 				e
 			);
     	}
@@ -510,10 +510,10 @@ public final class AOKeyStoreManagerFactory {
     		// Proporcionamos el componente padre como parametro
     		ksmUni.init(AOKeyStore.SHARED_NSS, null, pssCallback, new Object[] { parentComponent }, forceReset);
     	}
-    	catch (final AOException e) {
-    		throw new AOKeystoreAlternativeException(
+		catch (final AOException e) {
+			throw new AOKeystoreAlternativeException(
 				getAlternateKeyStoreType(AOKeyStore.MOZ_UNI),
-				"Error al inicializar el almacen NSS: " + e, //$NON-NLS-1$
+				"Erro ao inicializar o repositório NSS: " + e, //$NON-NLS-1$
 				e
 			);
     	}
@@ -582,26 +582,26 @@ public final class AOKeyStoreManagerFactory {
                  forceReset
             );
         }
-        catch (final AOException e) {
-            throw new AOKeystoreAlternativeException(
-        		getAlternateKeyStoreType(store), "Error al inicializar el Llavero de Mac OS X", e //$NON-NLS-1$
-    		);
+		catch (final AOException e) {
+			throw new AOKeystoreAlternativeException(
+				getAlternateKeyStoreType(store), "Erro ao inicializar o Chaveiro do Mac OS X", e //$NON-NLS-1$
+			);
         }
         final AggregatedKeyStoreManager aksm = new AggregatedKeyStoreManager(ksm);
-        try {
-    		KeyStoreUtilities.addPreferredKeyStoreManagers(aksm, parentComponent);
-    	}
-    	catch (final AOCancelledOperationException e) {
-    		LOGGER.info("Se cancelo el uso del driver Java: " + e); //$NON-NLS-1$
-    	}
+		try {
+			KeyStoreUtilities.addPreferredKeyStoreManagers(aksm, parentComponent);
+		}
+		catch (final AOCancelledOperationException e) {
+			LOGGER.info("O uso do driver Java foi cancelado: " + e); //$NON-NLS-1$
+		}
 
         return aksm;
     }
 
     /** Devuelve el almac&eacute;n de claves alternativo al actual m&aacute;s apropiado para usar
-     * cuando falla la carga de este &uacute;ltimo.
-     * @param currentStore Almac&eacute;n de claves actual
-     * @return <code>AOKeyStore</code> alternativo o <code>null</code> si no hay alternativo */
+	* quando falha o carregamento deste último.
+	* @param currentStore Repositório de chaves atual
+	* @return <code>AOKeyStore</code> alternativo ou <code>null</code> se não houver alternativo */
     private static AOKeyStore getAlternateKeyStoreType(final AOKeyStore currentStore) {
         if (AOKeyStore.PKCS12.equals(currentStore)) {
             return null;
